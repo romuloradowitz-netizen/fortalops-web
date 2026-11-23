@@ -3,12 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FortalOps | VPN & Game Booster — Fortaleza Direct Submarine Hub</title>
-  <!-- Supabase SDK Oficial -->
+  <title>FortalOps | VPN Segura & VPN Desempenho — Hub Submarino Fortaleza-CE (Tier III)</title>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
     :root {
-      --bg: #070b14;
+      --bg: #060a12;
       --surface: #0f172a;
       --surface-2: #1e293b;
       --primary: #06b6d4;
@@ -25,12 +24,12 @@
     .container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
 
     /* Navbar */
-    header { position: sticky; top: 0; z-index: 100; background: rgba(7, 11, 20, 0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+    header { position: sticky; top: 0; z-index: 100; background: rgba(6, 10, 18, 0.94); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
     .nav { display: flex; justify-content: space-between; align-items: center; height: 72px; gap: 16px; }
     .logo { font-size: 1.5rem; font-weight: 800; color: var(--text); text-decoration: none; display: flex; align-items: center; gap: 8px; }
     .logo span { color: var(--primary); }
-    .nav-links { display: flex; gap: 26px; align-items: center; }
-    .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.95rem; font-weight: 500; transition: 0.2s; }
+    .nav-links { display: flex; gap: 22px; align-items: center; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.92rem; font-weight: 500; transition: 0.2s; }
     .nav-links a:hover { color: var(--text); }
     .nav-actions { display: flex; align-items: center; gap: 10px; }
 
@@ -40,39 +39,49 @@
     .btn-ghost { background: transparent; color: var(--text); border: 1px solid var(--border); }
     .btn-ghost:hover { border-color: var(--primary); background: rgba(6, 182, 212, 0.08); }
     .btn-accent { background: var(--accent); color: #022c22; }
-    .btn-danger { background: rgba(239, 68, 68, 0.15); color: #fca5a5; border: 1px solid rgba(239, 68, 68, 0.4); }
     .btn-sm { padding: 6px 12px; font-size: 0.82rem; }
     .btn-lg { padding: 14px 28px; font-size: 1.05rem; }
 
     /* Hero */
-    .hero { padding: 80px 0 56px; text-align: center; background: radial-gradient(circle at top center, rgba(6, 182, 212, 0.12), transparent 60%); }
-    .pill { display: inline-flex; align-items: center; gap: 8px; background: rgba(16, 185, 129, 0.12); color: var(--accent); border: 1px solid rgba(16, 185, 129, 0.3); padding: 6px 16px; border-radius: 999px; font-size: 0.85rem; font-weight: 600; margin-bottom: 22px; }
-    h1 { font-size: clamp(2.1rem, 5vw, 3.6rem); font-weight: 800; line-height: 1.12; letter-spacing: -1px; max-width: 900px; margin: 0 auto 20px; }
+    .hero { padding: 76px 0 56px; text-align: center; background: radial-gradient(circle at top center, rgba(6, 182, 212, 0.16), transparent 62%); }
+    .pill-row { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-bottom: 22px; }
+    .pill { display: inline-flex; align-items: center; gap: 6px; background: rgba(16, 185, 129, 0.12); color: var(--accent); border: 1px solid rgba(16, 185, 129, 0.35); padding: 6px 14px; border-radius: 999px; font-size: 0.82rem; font-weight: 700; }
+    .pill.cyan { background: rgba(6, 182, 212, 0.12); color: var(--primary); border-color: rgba(6, 182, 212, 0.35); }
+    h1 { font-size: clamp(2.1rem, 4.8vw, 3.5rem); font-weight: 800; line-height: 1.12; letter-spacing: -1px; max-width: 960px; margin: 0 auto 20px; }
     h1 span { color: var(--primary); }
-    .hero p { font-size: 1.15rem; color: var(--muted); max-width: 700px; margin: 0 auto 32px; }
+    .hero p { font-size: 1.14rem; color: var(--muted); max-width: 780px; margin: 0 auto 32px; }
     .hero-cta { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
 
     /* Trust Strip */
-    .trust-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 18px; margin: 48px 0 10px; }
+    .trust-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 18px; margin: 48px 0 10px; }
     .trust-item { background: var(--surface); border: 1px solid var(--border); padding: 20px; border-radius: 12px; text-align: center; }
-    .trust-item strong { display: block; font-size: 1.65rem; color: var(--primary); margin-bottom: 4px; }
-    .trust-item span { font-size: 0.86rem; color: var(--muted); }
+    .trust-item strong { display: block; font-size: 1.55rem; color: var(--primary); margin-bottom: 4px; }
+    .trust-item span { font-size: 0.85rem; color: var(--muted); }
 
-    section { padding: 72px 0; }
-    .sec-title { text-align: center; font-size: clamp(1.75rem, 3.5vw, 2.4rem); font-weight: 800; margin-bottom: 12px; }
-    .sec-sub { text-align: center; color: var(--muted); max-width: 650px; margin: 0 auto 44px; }
+    section { padding: 68px 0; }
+    .sec-title { text-align: center; font-size: clamp(1.75rem, 3.5vw, 2.35rem); font-weight: 800; margin-bottom: 12px; }
+    .sec-sub { text-align: center; color: var(--muted); max-width: 720px; margin: 0 auto 44px; }
 
-    /* Features */
-    .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 22px; }
-    .card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 28px; }
-    .card h3 { font-size: 1.18rem; margin-bottom: 8px; color: var(--primary); }
-    .card p { color: var(--muted); font-size: 0.94rem; }
+    /* Fortaleza Hub & Tier III Banner */
+    .hub-box { background: linear-gradient(145deg, #0f172a, #0b1324); border: 1px solid rgba(6, 182, 212, 0.35); border-radius: 18px; padding: 36px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 28px; align-items: center; }
+    .cable-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+    .cable-tag { background: var(--bg); border: 1px solid var(--border); color: var(--primary); padding: 5px 12px; border-radius: 8px; font-size: 0.8rem; font-weight: 700; }
+
+    /* Products Showcase (VPN Segura vs VPN Desempenho) */
+    .prod-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; }
+    .prod-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 32px; position: relative; }
+    .prod-card.highlight { border: 2px solid var(--primary); background: linear-gradient(180deg, rgba(6,182,212,0.06), var(--surface)); }
+    .prod-tag { display: inline-block; font-size: 0.78rem; font-weight: 800; text-transform: uppercase; padding: 4px 10px; border-radius: 6px; margin-bottom: 12px; background: rgba(16, 185, 129, 0.15); color: var(--accent); }
+    .prod-card.highlight .prod-tag { background: rgba(6, 182, 212, 0.18); color: var(--primary); }
+
+    /* No-Logs & Security Box */
+    .nologs-banner { background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.35); border-radius: 16px; padding: 28px; margin-top: 36px; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
 
     /* Pricing */
     .billing-toggle { display: flex; justify-content: center; gap: 8px; margin-bottom: 40px; background: var(--surface); padding: 6px; border-radius: 12px; width: fit-content; margin-inline: auto; border: 1px solid var(--border); }
     .toggle-btn { background: transparent; color: var(--muted); border: none; padding: 9px 18px; border-radius: 8px; font-weight: 600; cursor: pointer; }
     .toggle-btn.active { background: var(--primary); color: #042f2e; }
-    .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 24px; }
+    .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); gap: 24px; max-width: 860px; margin: 0 auto; }
     .plan-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 32px; display: flex; flex-direction: column; position: relative; }
     .plan-card.popular { border: 2px solid var(--primary); }
     .badge-pop { position: absolute; top: -13px; right: 20px; background: var(--accent); color: #022c22; font-size: 0.76rem; font-weight: 800; padding: 4px 12px; border-radius: 999px; text-transform: uppercase; }
@@ -88,7 +97,7 @@
     .os-card:hover { border-color: var(--primary); background: var(--surface-2); }
     .os-card span { font-size: 0.84rem; color: var(--primary); font-weight: 600; }
 
-    /* Dashboard (Área Logada Cliente & Admin) */
+    /* Dashboard */
     #dashboardSection { display: none; background: #0a101d; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 48px 0; }
     .dash-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; margin-bottom: 28px; }
     .role-badge { padding: 4px 12px; border-radius: 999px; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; background: rgba(6, 182, 212, 0.15); color: var(--primary); }
@@ -101,19 +110,22 @@
     .st-pending { background: rgba(245, 158, 11, 0.15); color: var(--warn); }
     .st-active { background: rgba(16, 185, 129, 0.15); color: var(--accent); }
 
-    /* Forms & Modals */
-    .modal-backdrop { display: none; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.78); backdrop-filter: blur(4px); z-index: 200; align-items: center; justify-content: center; padding: 20px; }
+    /* Modals */
+    .modal-backdrop { display: none; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.82); backdrop-filter: blur(4px); z-index: 200; align-items: center; justify-content: center; padding: 20px; }
     .modal-backdrop.open { display: flex; }
-    .modal { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; max-width: 440px; width: 100%; padding: 30px; position: relative; max-height: 90vh; overflow-y: auto; }
+    .modal { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; max-width: 480px; width: 100%; padding: 30px; position: relative; max-height: 90vh; overflow-y: auto; }
+    .modal.modal-lg { max-width: 780px; }
     .close-modal { position: absolute; top: 14px; right: 18px; background: none; border: none; color: var(--muted); font-size: 1.5rem; cursor: pointer; }
     .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
     .form-group { margin-bottom: 14px; text-align: left; }
     .form-group label { display: block; font-size: 0.84rem; color: var(--muted); margin-bottom: 5px; }
     .form-group input, .form-group textarea { width: 100%; padding: 10px 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg); color: var(--text); font-size: 0.92rem; }
-    .form-group input:focus { outline: none; border-color: var(--primary); }
+    .contract-text { background: var(--bg); border: 1px solid var(--border); padding: 20px; border-radius: 12px; font-size: 0.88rem; color: var(--muted); max-height: 60vh; overflow-y: auto; line-height: 1.7; }
+    .contract-text h4 { color: var(--text); margin: 16px 0 6px; }
 
-    footer { border-top: 1px solid var(--border); padding: 40px 0; color: var(--muted); font-size: 0.88rem; }
-    @media (max-width: 820px) { .nav-links { display: none; } }
+    footer { border-top: 1px solid var(--border); padding: 44px 0; color: var(--muted); font-size: 0.88rem; }
+    footer a { color: var(--primary); text-decoration: none; cursor: pointer; }
+    @media (max-width: 860px) { .nav-links { display: none; } }
   </style>
 </head>
 <body>
@@ -123,9 +135,10 @@
     <div class="container nav">
       <a href="#" class="logo">Fortal<span>Ops</span></a>
       <nav class="nav-links">
-        <a href="#features" data-i18n="nav_features">Recursos</a>
+        <a href="#hub-fortaleza">Hub Fortaleza-CE</a>
+        <a href="#produtos">VPN Segura & Desempenho</a>
         <a href="#pricing" data-i18n="nav_pricing">Planos</a>
-        <a href="#download" data-i18n="nav_download">Baixar App</a>
+        <a href="#" onclick="openContract(); return false;">Contrato & No-Logs</a>
       </nav>
       <div class="nav-actions">
         <select id="langSelector" class="lang-select" aria-label="Idioma">
@@ -147,102 +160,58 @@
     </div>
   </header>
 
-  <!-- ÁREA LOGADA (CLIENTE + PAINEL ADMIN) -->
+  <!-- ÁREA LOGADA (CLIENTE + ADMIN) -->
   <section id="dashboardSection">
     <div class="container">
       <div class="dash-header">
         <div>
-          <span class="role-badge" id="dashRoleBadge">CLIENTE</span>
+          <span class="role-badge" id="dashRoleBadge">ASSINANTE</span>
           <h2 style="margin-top: 6px;" id="dashWelcome">Bem-vindo ao Painel FortalOps</h2>
           <p style="color: var(--muted); font-size: 0.92rem;" id="dashEmail"></p>
         </div>
       </div>
 
-      <!-- Painel do Cliente: Minhas Assinaturas -->
       <div class="dash-box">
-        <h3 style="margin-bottom: 12px;">Minhas Assinaturas & Acesso VPN</h3>
+        <h3 style="margin-bottom: 12px;">Minhas Assinaturas & Acesso VPN (Data Center Tier III • Fortaleza-CE)</h3>
         <div id="clientSubscriptionsList" style="color: var(--muted);">Carregando assinaturas...</div>
       </div>
 
-      <!-- PAINEL ADMINISTRATIVO (Visível apenas quando role === 'admin') -->
+      <!-- PAINEL ADMINISTRATIVO -->
       <div id="adminPanel" style="display: none;">
         <div class="dash-box" style="border-color: var(--warn);">
           <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 16px;">
-            <h3 style="color: var(--warn);">⚙️ Admin — Gestão de Planos (Persistência PostgreSQL)</h3>
+            <h3 style="color: var(--warn);">⚙️ Admin — Gestão de Planos (PostgreSQL)</h3>
             <button class="btn btn-sm" onclick="toggleNewPlanForm()">+ Novo Plano</button>
           </div>
 
-          <!-- Formulário Criar/Editar Plano -->
           <form id="newPlanForm" onsubmit="savePlanAdmin(event)" style="display: none; background: var(--bg); padding: 20px; border-radius: 12px; margin-bottom: 20px; border: 1px solid var(--border);">
             <h4 style="margin-bottom: 14px;">Cadastrar Novo Plano</h4>
             <div class="form-grid">
-              <div class="form-group">
-                <label>Slug (identificador único)</label>
-                <input type="text" id="pSlug" required placeholder="ex: gamer-ultra" />
-              </div>
-              <div class="form-group">
-                <label>Nome (Português)</label>
-                <input type="text" id="pNamePt" required placeholder="Ex: Gamer Ultra" />
-              </div>
-              <div class="form-group">
-                <label>Nome (Inglês / Global)</label>
-                <input type="text" id="pNameEn" required placeholder="Ex: Gamer Ultra" />
-              </div>
-              <div class="form-group">
-                <label>Preço Mensal (R$ BRL)</label>
-                <input type="number" step="0.01" id="pPriceBrl" required placeholder="29.90" />
-              </div>
-              <div class="form-group">
-                <label>Preço Mensal ($ USD)</label>
-                <input type="number" step="0.01" id="pPriceUsd" required placeholder="8.90" />
-              </div>
-              <div class="form-group">
-                <label>Máx. Dispositivos</label>
-                <input type="number" id="pDevices" required value="5" />
-              </div>
+              <div class="form-group"><label>Slug</label><input type="text" id="pSlug" required placeholder="ex: vpn-dedicada" /></div>
+              <div class="form-group"><label>Nome (PT)</label><input type="text" id="pNamePt" required placeholder="Ex: VPN IP Dedicado" /></div>
+              <div class="form-group"><label>Nome (EN)</label><input type="text" id="pNameEn" required placeholder="Ex: Dedicated IP VPN" /></div>
+              <div class="form-group"><label>Preço Mensal (R$)</label><input type="number" step="0.01" id="pPriceBrl" required placeholder="39.90" /></div>
+              <div class="form-group"><label>Preço Mensal ($ USD)</label><input type="number" step="0.01" id="pPriceUsd" required placeholder="11.90" /></div>
+              <div class="form-group"><label>Máx. Dispositivos</label><input type="number" id="pDevices" required value="5" /></div>
             </div>
-            <div class="form-group">
-              <label>Benefícios em Português (1 por linha)</label>
-              <textarea id="pFeatPt" rows="3" required placeholder="Servidor Fortaleza-CE&#10;Até 5 dispositivos&#10;Rota Game Booster"></textarea>
-            </div>
-            <div class="form-group">
-              <label>Benefícios em Inglês (1 por linha)</label>
-              <textarea id="pFeatEn" rows="3" required placeholder="Fortaleza-CE Server&#10;Up to 5 devices&#10;Game Booster Route"></textarea>
-            </div>
-            <button type="submit" class="btn btn-accent">Salvar Plano no Banco</button>
+            <div class="form-group"><label>Benefícios PT (1 por linha)</label><textarea id="pFeatPt" rows="3" required></textarea></div>
+            <div class="form-group"><label>Benefícios EN (1 por linha)</label><textarea id="pFeatEn" rows="3" required></textarea></div>
+            <button type="submit" class="btn btn-accent">Salvar Plano</button>
           </form>
 
           <div style="overflow-x: auto;">
             <table>
-              <thead>
-                <tr>
-                  <th>Plano</th>
-                  <th>R$/mês</th>
-                  <th>US$/mês</th>
-                  <th>Dispositivos</th>
-                  <th>Status</th>
-                  <th>Ações</th>
-                </tr>
-              </thead>
+              <thead><tr><th>Plano</th><th>R$/mês</th><th>US$/mês</th><th>Dispositivos</th><th>Status</th><th>Ações</th></tr></thead>
               <tbody id="adminPlansTable"></tbody>
             </table>
           </div>
         </div>
 
-        <!-- Admin: Assinaturas de Clientes para Aprovação Pix -->
         <div class="dash-box" style="border-color: var(--warn);">
           <h3 style="color: var(--warn); margin-bottom: 12px;">💳 Admin — Assinaturas & Aprovação de Pagamentos</h3>
           <div style="overflow-x: auto;">
             <table>
-              <thead>
-                <tr>
-                  <th>Cliente</th>
-                  <th>Plano</th>
-                  <th>Ciclo</th>
-                  <th>Status</th>
-                  <th>Ação</th>
-                </tr>
-              </thead>
+              <thead><tr><th>Cliente</th><th>Plano</th><th>Ciclo</th><th>Status</th><th>Ação</th></tr></thead>
               <tbody id="adminSubsTable"></tbody>
             </table>
           </div>
@@ -254,59 +223,130 @@
   <!-- Hero -->
   <section class="hero">
     <div class="container">
-      <div class="pill" data-i18n="hero_badge">Hub de Cabos Submarinos • Fortaleza-CE, Brasil</div>
-      <h1 data-i18n="hero_title">VPN & Game Booster com <span>Ultra-Baixa Latência</span> Direta</h1>
-      <p data-i18n="hero_sub">Conecte-se diretamente ao entroncamento de cabos submarinos de Fortaleza sem desviar seu tráfego por São Paulo. Criptografia WireGuard de última geração, IP brasileiro limpo e zero registro de logs.</p>
+      <div class="pill-row">
+        <span class="pill cyan">🇧🇷 VPN Brasileira em Fortaleza-CE</span>
+        <span class="pill">🏢 Data Center Tier III Certificado</span>
+        <span class="pill cyan">🌊 Centro de Cabos Submarinos Internacionais</span>
+        <span class="pill">🔒 Política Estrita Zero-Logs</span>
+      </div>
+      <h1>VPN Brasileira no <span>Coração dos Cabos Submarinos</span> de Fortaleza-CE</h1>
+      <p>Rodando em infraestrutura <strong>Data Center Tier III</strong> em Fortaleza — o maior entroncamento de cabos submarinos da América Latina. Escolha entre <strong>VPN Segura</strong> (privacidade máxima e IP brasileiro) ou <strong>VPN Desempenho</strong> (rota direta sem passar por São Paulo). Zero registro de logs de tráfego.</p>
       <div class="hero-cta">
-        <a href="#pricing" class="btn btn-lg" data-i18n="hero_cta_primary">Obter FortalOps VPN</a>
-        <a href="#download" class="btn btn-ghost btn-lg" data-i18n="hero_cta_secondary">Baixar Aplicativos</a>
+        <a href="#pricing" class="btn btn-lg">Assinar FortalOps VPN</a>
+        <a href="#produtos" class="btn btn-ghost btn-lg">Conhecer VPN Segura & Desempenho</a>
       </div>
 
       <div class="trust-grid">
-        <div class="trust-item"><strong>&lt; 10 ms</strong><span data-i18n="stat_1">Latência local no Nordeste</span></div>
-        <div class="trust-item"><strong>~55 ms</strong><span data-i18n="stat_2">Rota direta Fortaleza → Miami</span></div>
-        <div class="trust-item"><strong>WireGuard®</strong><span data-i18n="stat_3">Protocolo moderno e leve</span></div>
-        <div class="trust-item"><strong>No-Logs</strong><span data-i18n="stat_4">Privacidade estrita verificada</span></div>
+        <div class="trust-item"><strong>Tier III</strong><span>Data Center de alta segurança em Fortaleza-CE</span></div>
+        <div class="trust-item"><strong>+16 Cabos</strong><span>Conexão direta com EUA, Europa e África</span></div>
+        <div class="trust-item"><strong>0% Logs</strong><span>Nenhum registro de tráfego ou histórico</span></div>
+        <div class="trust-item"><strong>PCI-DSS</strong><span>Checkout blindado (Pix e Cartão)</span></div>
       </div>
     </div>
   </section>
 
-  <!-- Features -->
-  <section id="features" class="container">
-    <h2 class="sec-title" data-i18n="feat_title">Segurança de nível global com rota direta</h2>
-    <p class="sec-sub" data-i18n="feat_sub">Projetada para gamers competitivos, nômades digitais e usuários que exigem velocidade máxima e privacidade real.</p>
-    <div class="grid-3">
-      <div class="card"><h3 data-i18n="f1_title">⚡ Roteamento Submarino Direto</h3><p data-i18n="f1_desc">Evite o efeito tromboning das operadoras. Seus dados saem direto de Fortaleza para América do Norte e Europa pelo caminho mais curto.</p></div>
-      <div class="card"><h3 data-i18n="f2_title">🎮 Game Booster Anti-Jitter</h3><p data-i18n="f2_desc">Estabilize seu ping e elimine perda de pacotes em partidas online com rotas otimizadas e MTU ajustado para jogos.</p></div>
-      <div class="card"><h3 data-i18n="f3_title">🛡️ ChaCha20 & Kill Switch</h3><p data-i18n="f3_desc">Proteção completa em redes Wi-Fi públicas com criptografia moderna de alta eficiência energética no celular e PC.</p></div>
-      <div class="card"><h3 data-i18n="f4_title">🇧🇷 IP Brasileiro Limpo</h3><p data-i18n="f4_desc">Acesse bancos, Gov.br e serviços de streaming brasileiros no exterior sem bloqueios de datacenter.</p></div>
-      <div class="card"><h3 data-i18n="f5_title">🔀 Split Tunneling</h3><p data-i18n="f5_desc">Escolha exatamente quais jogos ou aplicativos passam pelo túnel VPN e quais usam sua conexão local diretamente.</p></div>
-      <div class="card"><h3 data-i18n="f6_title">📱 Multi-Dispositivos</h3><p data-i18n="f6_desc">Proteja seu computador, smartphone e tablet com uma única assinatura usando chaves criptográficas individuais.</p></div>
+  <!-- Hub Fortaleza-CE & Data Center Tier III -->
+  <section id="hub-fortaleza" class="container">
+    <div class="hub-box">
+      <div>
+        <span class="prod-tag">Vantagem Geográfica & Engenharia de Rede</span>
+        <h2 style="font-size: 1.9rem; margin-bottom: 14px;">Por que Fortaleza-CE é o centro estratégico da internet no Brasil?</h2>
+        <p style="color: var(--muted); margin-bottom: 14px;">
+          Fortaleza é o ponto de chegada e partida de dezenas de cabos submarinos intercontinentais que ligam a América do Sul diretamente à América do Norte, Europa e África. Quando você usa uma operadora comum, seu tráfego muitas vezes desce até São Paulo para depois voltar ao exterior — adicionando até <strong>+60 ms de latência desnecessária</strong>.
+        </p>
+        <p style="color: var(--muted);">
+          Com os servidores da <strong>FortalOps hospedados em Data Center Tier III em Fortaleza-CE</strong>, sua conexão sai pelo caminho mais curto do continente com redundância elétrica, climatização de precisão e segurança física 24/7.
+        </p>
+        <div class="cable-tags">
+          <span class="cable-tag">🌊 Monet (EUA)</span>
+          <span class="cable-tag">🌊 EllaLink (Europa)</span>
+          <span class="cable-tag">🌊 Seabras-1 (Nova York)</span>
+          <span class="cable-tag">🌊 SACS (África)</span>
+          <span class="cable-tag">🌊 Malbec & Junior</span>
+        </div>
+      </div>
+      <div class="card" style="background: var(--bg);">
+        <h3 style="margin-bottom: 14px;">🛡️ Segurança de Infraestrutura & Pagamento</h3>
+        <ul class="plan-features" style="margin: 0;">
+          <li><strong>Data Center Tier III (Fortaleza-CE):</strong> Disponibilidade garantida de 99,982%, controle biométrico de acesso e energia redundante N+1.</li>
+          <li><strong>Política Estrita No-Logs:</strong> Nossos servidores WireGuard® operam em memória sem gravar sites acessados, DNS, IP de origem ou horários de navegação.</li>
+          <li><strong>Segurança Total no Cartão de Crédito:</strong> O processamento financeiro ocorre em ambiente certificado <strong>PCI-DSS</strong> (Asaas) com tokenização. O site FortalOps nunca armazena nem visualiza dados do seu cartão.</li>
+        </ul>
+      </div>
     </div>
   </section>
 
-  <!-- Pricing (Carregado Dinamicamente do Supabase!) -->
+  <!-- Dois Produtos: VPN Segura e VPN Desempenho -->
+  <section id="produtos" class="container">
+    <h2 class="sec-title">Dois Produtos Especializados. Uma Base Tier III em Fortaleza.</h2>
+    <p class="sec-sub">Escolha a solução desenhada para o seu objetivo — ambas com criptografia WireGuard® de última geração e política rigorosa de zero logs de tráfego.</p>
+
+    <div class="prod-grid">
+      <div class="prod-card">
+        <span class="prod-tag">Produto 01 • Privacidade & Mobilidade</span>
+        <h3 style="font-size: 1.5rem; margin-bottom: 10px;">🛡️ VPN Segura</h3>
+        <p style="color: var(--muted); margin-bottom: 18px;">
+          Ideal para proteger sua navegação em redes Wi-Fi públicas, trabalho remoto e para quem mora ou viaja ao exterior e precisa de uma <strong>VPN Brasileira autêntica</strong>.
+        </p>
+        <ul class="plan-features" style="margin-bottom: 0;">
+          <li><strong>IP Brasileiro Real (Fortaleza-CE):</strong> Acesse bancos brasileiros, Gov.br, e-CAC e streamings nacionais sem bloqueios.</li>
+          <li><strong>Criptografia Militar ChaCha20-Poly1305:</strong> Túnel blindado contra interceptação em aeroportos, hotéis e cafés.</li>
+          <li><strong>Zero Registro de Tráfego (No-Logs):</strong> Sua privacidade garantida contratualmente e tecnicamente.</li>
+          <li><strong>Kill Switch & Proteção contra Vazamento DNS.</strong></li>
+        </ul>
+      </div>
+
+      <div class="prod-card highlight">
+        <span class="prod-tag">Produto 02 • Baixa Latência & Cabos Submarinos</span>
+        <h3 style="font-size: 1.5rem; margin-bottom: 10px;">⚡ VPN Desempenho</h3>
+        <p style="color: var(--muted); margin-bottom: 18px;">
+          Projetada para gamers competitivos, traders e criadores de conteúdo em Fortaleza e no Nordeste que exigem <strong>rota direta pelos cabos submarinos internacionais</strong>.
+        </p>
+        <ul class="plan-features" style="margin-bottom: 0;">
+          <li><strong>Roteamento Submarino Direto:</strong> Elimina o desvio por São Paulo rumo a servidores de Miami, Nova York e Europa.</li>
+          <li><strong>Anti-Jitter & Perda Zero de Pacotes:</strong> Ajuste fino de MTU e priorização de pacotes UDP para partidas online.</li>
+          <li><strong>Data Center Tier III em Fortaleza-CE:</strong> Backbone de alta capacidade conectado aos principais IX.br e cabos globais.</li>
+          <li><strong>Split Tunneling Inteligente:</strong> Rode apenas o jogo ou aplicação pesada pelo túnel VPN.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Banner No-Logs -->
+    <div class="nologs-banner">
+      <div>
+        <h3 style="color: var(--accent); margin-bottom: 6px;">🔒 Compromisso Público Zero-Logs (No-Logs)</h3>
+        <p style="font-size: 0.92rem; color: var(--muted);">
+          A FortalOps <strong>não coleta, não armazena e não monitora</strong> seu histórico de navegação, tráfego de dados, consultas DNS, endereços IP de conexão ou duração de sessões. Essa garantia está formalizada na Cláusula 4 do nosso Contrato Padrão de Prestação de Serviços.
+        </p>
+      </div>
+      <div style="display: flex; align-items: center; justify-content: flex-end;">
+        <button class="btn btn-ghost" onclick="openContract()">📄 Ler Contrato Padrão & Cláusula No-Logs</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
   <section id="pricing" class="container">
-    <h2 class="sec-title" data-i18n="price_title">Escolha o plano ideal para você</h2>
-    <p class="sec-sub" data-i18n="price_sub">Todos os planos incluem acesso total ao hub de Fortaleza-CE, suporte técnico prioritário e garantia de 7 dias.</p>
+    <h2 class="sec-title">Planos FortalOps (VPN Segura & VPN Desempenho)</h2>
+    <p class="sec-sub">Pagamento seguro via Pix ou Cartão de Crédito (ambiente certificado PCI-DSS). Garantia incondicional de 7 dias.</p>
 
     <div class="billing-toggle">
-      <button class="toggle-btn active" onclick="setCycle('monthly', this)" data-i18n="cycle_monthly">Mensal</button>
-      <button class="toggle-btn" onclick="setCycle('annual', this)" data-i18n="cycle_annual">Anual (-35%)</button>
-      <button class="toggle-btn" onclick="setCycle('biennial', this)" data-i18n="cycle_biennial">2 Anos (-50%)</button>
+      <button class="toggle-btn active" onclick="setCycle('monthly', this)">Mensal</button>
+      <button class="toggle-btn" onclick="setCycle('annual', this)">Anual (-35%)</button>
+      <button class="toggle-btn" onclick="setCycle('biennial', this)">2 Anos (-50%)</button>
     </div>
 
     <div class="pricing-grid" id="dynamicPlansGrid">
-      <p style="text-align: center; color: var(--muted); grid-column: 1/-1;">Carregando planos do banco de dados...</p>
+      <p style="text-align: center; color: var(--muted); grid-column: 1/-1;">Carregando planos do Data Center Fortaleza-CE...</p>
     </div>
   </section>
 
   <!-- Download Apps -->
   <section id="download" class="container">
-    <h2 class="sec-title" data-i18n="dl_title">Baixe o aplicativo para todos os seus dispositivos</h2>
-    <p class="sec-sub" data-i18n="dl_sub">Compatível com o cliente oficial WireGuard® e com o aplicativo nativo FortalOps. Conecte-se via QR Code em segundos.</p>
+    <h2 class="sec-title">Baixe o cliente oficial WireGuard®</h2>
+    <p class="sec-sub">Conecte-se ao Data Center Tier III de Fortaleza-CE em segundos via QR Code ou arquivo de configuração.</p>
     <div class="os-grid">
-      <a href="https://download.wireguard.com/windows-client/wireguard-installer.exe" class="os-card" target="_blank"><div style="font-size: 2rem;">🪟</div><h4>Windows</h4><span data-i18n="dl_btn">Baixar (.exe)</span></a>
+      <a href="https://download.wireguard.com/windows-client/wireguard-installer.exe" class="os-card" target="_blank"><div style="font-size: 2rem;">🪟</div><h4>Windows</h4><span>Baixar (.exe)</span></a>
       <a href="https://apps.apple.com/us/app/wireguard/id1451685025" class="os-card" target="_blank"><div style="font-size: 2rem;">🍎</div><h4>macOS</h4><span>Mac App Store</span></a>
       <a href="https://play.google.com/store/apps/details?id=com.wireguard.android" class="os-card" target="_blank"><div style="font-size: 2rem;">🤖</div><h4>Android</h4><span>Google Play</span></a>
       <a href="https://apps.apple.com/us/app/wireguard/id1441195209" class="os-card" target="_blank"><div style="font-size: 2rem;">📱</div><h4>iOS</h4><span>App Store</span></a>
@@ -316,149 +356,88 @@
 
   <footer>
     <div class="container" style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px;">
-      <div><strong style="color: var(--text);">FortalOps</strong> — Fortaleza, Ceará, Brasil.</div>
-      <div>© 2026 FortalOps. <span data-i18n="footer_rights">Todos os direitos reservados.</span></div>
+      <div><strong style="color: var(--text);">FortalOps</strong> — Infraestrutura Tier III • Fortaleza, Ceará, Brasil.</div>
+      <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+        <a onclick="openContract()">Contrato Padrão de Uso</a>
+        <a onclick="openContract()">Política Estrita No-Logs</a>
+        <span>© 2026 FortalOps.</span>
+      </div>
     </div>
   </footer>
 
-  <!-- Auth Modal -->
+  <!-- Auth Modal (Com Aceite Obrigatório do Contrato Padrão e Política No-Logs) -->
   <div class="modal-backdrop" id="authModal">
     <div class="modal">
       <button class="close-modal" onclick="closeAuth()">&times;</button>
       <h3 id="modalTitle" style="margin-bottom: 6px;">Criar Conta FortalOps</h3>
-      <p id="modalSub" style="color: var(--muted); font-size: 0.88rem; margin-bottom: 18px;">Persistência segura via Supabase Auth.</p>
+      <p style="color: var(--muted); font-size: 0.86rem; margin-bottom: 18px;">Acesso imediato ao portal e infraestrutura Tier III de Fortaleza-CE.</p>
       <form onsubmit="handleAuthSubmit(event)">
         <div class="form-group" id="nameGroup">
-          <label data-i18n="form_name">Nome Completo</label>
+          <label>Nome Completo</label>
           <input type="text" id="userName" placeholder="Ex: Rômulo Radowitz" />
         </div>
         <div class="form-group">
-          <label data-i18n="form_email">E-mail</label>
+          <label>E-mail</label>
           <input type="email" id="userEmail" required placeholder="voce@exemplo.com" />
         </div>
         <div class="form-group">
-          <label data-i18n="form_pass">Senha (mín. 6 caracteres)</label>
+          <label>Senha (mín. 6 caracteres)</label>
           <input type="password" id="userPass" required minlength="6" placeholder="••••••••" />
         </div>
-        <button type="submit" class="btn" style="width: 100%;" id="modalSubmitBtn">Continuar</button>
+        <div class="form-group" id="termsGroup" style="display: flex; align-items: flex-start; gap: 8px; margin-top: 10px;">
+          <input type="checkbox" id="acceptContract" required style="width: auto; margin-top: 4px;" />
+          <label for="acceptContract" style="font-size: 0.82rem; line-height: 1.4;">
+            Li e aceito o <a href="#" onclick="openContract(); return false;" style="color: var(--primary);">Contrato Padrão de Prestação de Serviços</a> e a <strong>Política Estrita Zero-Logs (No-Logs)</strong> da FortalOps.
+          </label>
+        </div>
+        <button type="submit" class="btn" style="width: 100%; margin-top: 8px;" id="modalSubmitBtn">Continuar</button>
       </form>
       <p id="authFeedback" style="margin-top: 12px; font-size: 0.86rem; color: var(--accent); text-align: center;"></p>
     </div>
   </div>
 
+  <!-- Modal Contrato Padrão & Política No-Logs -->
+  <div class="modal-backdrop" id="contractModal">
+    <div class="modal modal-lg">
+      <button class="close-modal" onclick="closeContract()">&times;</button>
+      <h3 style="margin-bottom: 6px;">Contrato Padrão de Prestação de Serviços VPN & Política No-Logs</h3>
+      <p style="color: var(--muted); font-size: 0.84rem; margin-bottom: 16px;">Versão 1.0 • Aplicável a todos os assinantes FortalOps (VPN Segura e VPN Desempenho)</p>
+      <div class="contract-text">
+        <h4>1. OBJETO DO SERVIÇO</h4>
+        <p>O presente Contrato regula o licenciamento e a disponibilização de infraestrutura de Rede Privada Virtual (VPN) criptografada nas modalidades <strong>VPN Segura</strong> e <strong>VPN Desempenho</strong>, operadas pela <strong>FortalOps</strong> em servidores hospedados em <strong>Data Center Tier III localizado em Fortaleza-CE, Brasil</strong>, conectado ao entroncamento internacional de cabos submarinos.</p>
+
+        <h4>2. ELEGIBILIDADE E CADASTRO</h4>
+        <p>O serviço destina-se exclusivamente a pessoas físicas maiores de 18 (dezoito) anos ou pessoas jurídicas devidamente constituídas. Ao criar uma conta, o Assinante declara fornecer informações cadastrais verídicas e compromete-se a manter suas credenciais e chaves criptográficas WireGuard® sob sigilo.</p>
+
+        <h4>3. USO ACEITÁVEL E PROIBIÇÕES</h4>
+        <p>O Assinante compromete-se a utilizar a FortalOps apenas para fins lícitos. É expressamente proibido utilizar a rede para: (a) ataques cibernéticos, DDoS, varredura de portas ou distribuição de malware; (b) envio de spam em massa ou fraude financeira; (c) violação de direitos autorais ou qualquer atividade ilícita prevista na legislação brasileira e internacional. O descumprimento acarretará a suspensão imediata da conta sem direito a reembolso.</p>
+
+        <h4>4. POLÍTICA ESTRITA DE NÃO REGISTRO DE TRÁFEGO (ZERO-LOGS / NO-LOGS)</h4>
+        <p>A privacidade do Assinante é o pilar central da FortalOps. Sob nossa rigorosa política <strong>No-Logs</strong>:</p>
+        <p>• <strong>Não registramos nem armazenamos:</strong> histórico de sites visitados, conteúdo de tráfego, consultas DNS, endereços IP de origem da conexão, carimbos de data/hora de sessão VPN ou largura de banda individualizada por destino.</p>
+        <p>• <strong>Dados mínimos de operação:</strong> Mantemos apenas os dados estritamente necessários para gestão da conta e cobrança (e-mail, plano contratado, status financeiro e contagem simultânea de chaves WireGuard® ativas para cumprimento do limite do plano), em conformidade com a Lei Geral de Proteção de Dados (LGPD — Lei nº 13.709/2018).</p>
+
+        <h4>5. INFRAESTRUTURA TIER III E DISPONIBILIDADE</h4>
+        <p>Os servidores VPN operam em Data Center padrão Tier III em Fortaleza-CE com redundância de energia e conectividade. Eventuais janelas de manutenção preventiva serão comunicadas previamente no painel do assinante. A velocidade final percebida depende também da qualidade da conexão local do provedor de internet (ISP) do Assinante.</p>
+
+        <h4>6. PAGAMENTOS, SEGURANÇA PCI-DSS E DIREITO DE ARREPENDIMENTO</h4>
+        <p>Os pagamentos são processados por intermediadores certificados <strong>PCI-DSS</strong> (como Asaas), não havendo armazenamento de números completos de cartão de crédito nos servidores da FortalOps. Nos termos do Art. 49 do Código de Defesa do Consumidor, o Assinante possui o prazo de <strong>7 (sete) dias corridos</strong> após a primeira contratação para solicitar o cancelamento e reembolso integral.</p>
+
+        <h4>7. FORO</h4>
+        <p>Fica eleito o Foro da Comarca de Fortaleza, Estado do Ceará, Brasil, para dirimir quaisquer questões oriundas deste Contrato.</p>
+      </div>
+      <div style="margin-top: 18px; text-align: right;">
+        <button class="btn" onclick="closeContract()">Entendi e Fechar</button>
+      </div>
+    </div>
+  </div>
+
   <script>
-    // =========================================================
-    // CONFIGURAÇÃO SUPABASE (COLE SUA ANON/PUBLISHABLE KEY ABAIXO)
-    // =========================================================
-const SUPABASE_URL = 'https://jbyyzztewzrurqreouqs.supabase.co';
-const SUPABASE_ANON_KEY = 'sb_publishable_4gsx3jcA6WqTPJPsRUuQsg_mgrAuINP';
-const PIX_KEY_DISPLAY = '02874149900';
+    const SUPABASE_URL = 'https://jbyyzztewzrurqreouqs.supabase.co';
+    const SUPABASE_ANON_KEY = 'sb_publishable_4gsx3jcA6WqTPJPsRUuQsg_mgrAuINP';
+    const PIX_KEY_DISPLAY = '02874149900';
 
     const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-    // Dicionário de Idiomas (PT, EN, IT, DE, FR)
-    const i18n = {
-      pt: {
-        nav_features: "Recursos", nav_pricing: "Planos", nav_download: "Baixar App",
-        btn_login: "Entrar", btn_signup: "Criar Conta",
-        hero_badge: "Hub de Cabos Submarinos • Fortaleza-CE, Brasil",
-        hero_title: "VPN & Game Booster com <span>Ultra-Baixa Latência</span> Direta",
-        hero_sub: "Conecte-se diretamente ao entroncamento de cabos submarinos de Fortaleza sem desviar seu tráfego por São Paulo. Criptografia WireGuard de última geração, IP brasileiro limpo e zero registro de logs.",
-        hero_cta_primary: "Obter FortalOps VPN", hero_cta_secondary: "Baixar Aplicativos",
-        stat_1: "Latência local no Nordeste", stat_2: "Rota direta Fortaleza → Miami",
-        stat_3: "Protocolo moderno e leve", stat_4: "Privacidade estrita verificada",
-        feat_title: "Segurança de nível global com rota direta",
-        feat_sub: "Projetada para gamers competitivos, nômades digitais e usuários que exigem velocidade máxima e privacidade real.",
-        price_title: "Escolha o plano ideal para você",
-        price_sub: "Todos os planos incluem acesso total ao hub de Fortaleza-CE, suporte técnico prioritário e garantia de 7 dias.",
-        cycle_monthly: "Mensal", cycle_annual: "Anual (-35%)", cycle_biennial: "2 Anos (-50%)",
-        badge_popular: "Mais Escolhido", per_month: "/mês", btn_select_plan: "Assinar Plano",
-        dl_title: "Baixe o aplicativo para todos os seus dispositivos",
-        dl_sub: "Compatível com o cliente oficial WireGuard® e com o aplicativo nativo FortalOps.",
-        dl_btn: "Baixar (.exe)", footer_rights: "Todos os direitos reservados.",
-        form_name: "Nome Completo", form_email: "E-mail", form_pass: "Senha"
-      },
-      en: {
-        nav_features: "Features", nav_pricing: "Pricing", nav_download: "Download App",
-        btn_login: "Log In", btn_signup: "Sign Up",
-        hero_badge: "Submarine Cable Hub • Fortaleza, Brazil",
-        hero_title: "Direct <span>Ultra-Low Latency</span> VPN & Game Booster",
-        hero_sub: "Connect directly to Fortaleza's submarine cable hub without routing traffic through São Paulo. Next-gen WireGuard encryption, clean Brazilian IP, and strict no-logs policy.",
-        hero_cta_primary: "Get FortalOps VPN", hero_cta_secondary: "Download Apps",
-        stat_1: "Local latency in Northeast BR", stat_2: "Direct route Fortaleza → Miami",
-        stat_3: "Modern lightweight protocol", stat_4: "Verified strict no-logs policy",
-        feat_title: "Global-grade security with direct submarine routing",
-        feat_sub: "Built for competitive gamers, digital nomads, and users demanding maximum speed and real privacy.",
-        price_title: "Choose the plan that fits your needs",
-        price_sub: "All plans include full access to the Fortaleza hub, priority technical support, and a 7-day guarantee.",
-        cycle_monthly: "Monthly", cycle_annual: "Annual (-35%)", cycle_biennial: "2 Years (-50%)",
-        badge_popular: "Most Popular", per_month: "/mo", btn_select_plan: "Subscribe Now",
-        dl_title: "Download the app for all your devices",
-        dl_sub: "Compatible with the official WireGuard® client and the native FortalOps app.",
-        dl_btn: "Download (.exe)", footer_rights: "All rights reserved.",
-        form_name: "Full Name", form_email: "Email", form_pass: "Password"
-      },
-      it: {
-        nav_features: "Funzionalità", nav_pricing: "Piani", nav_download: "Scarica App",
-        btn_login: "Accedi", btn_signup: "Registrati",
-        hero_badge: "Hub Cavi Sottomarini • Fortaleza, Brasile",
-        hero_title: "VPN & Game Booster a <span>Latenza Ultra-Bassa</span> Diretta",
-        hero_sub: "Connettiti direttamente all'hub dei cavi sottomarini di Fortaleza senza passare da San Paolo. Crittografia WireGuard di nuova generazione e zero log.",
-        hero_cta_primary: "Ottieni FortalOps VPN", hero_cta_secondary: "Scarica App",
-        stat_1: "Latenza locale Nord-Est BR", stat_2: "Rotta diretta Fortaleza → Miami",
-        stat_3: "Protocollo moderno e leggero", stat_4: "Politica No-Logs verificata",
-        feat_title: "Sicurezza globale con routing sottomarino diretto",
-        feat_sub: "Progettata per gamer competitivi e nomadi digitali.",
-        price_title: "Scegli il piano perfetto per te",
-        price_sub: "Accesso completo all'hub di Fortaleza e garanzia di 7 giorni.",
-        cycle_monthly: "Mensile", cycle_annual: "Annuale (-35%)", cycle_biennial: "2 Anni (-50%)",
-        badge_popular: "Più Scelto", per_month: "/mese", btn_select_plan: "Abbonati Ora",
-        dl_title: "Scarica l'app per tutti i tuoi dispositivi",
-        dl_sub: "Compatibile con WireGuard® ufficiale e FortalOps.",
-        dl_btn: "Scarica (.exe)", footer_rights: "Tutti i diritti riservati.",
-        form_name: "Nome Completo", form_email: "Email", form_pass: "Password"
-      },
-      de: {
-        nav_features: "Funktionen", nav_pricing: "Preise", nav_download: "App laden",
-        btn_login: "Anmelden", btn_signup: "Konto erstellen",
-        hero_badge: "Seekabel-Knotenpunkt • Fortaleza, Brasilien",
-        hero_title: "Direktes <span>Ultra-Low-Latency</span> VPN & Game Booster",
-        hero_sub: "Verbinden Sie sich direkt mit dem Seekabel-Hub in Fortaleza ohne Umweg über São Paulo. Modernste WireGuard-Verschlüsselung und strikte No-Logs-Richtlinie.",
-        hero_cta_primary: "FortalOps VPN holen", hero_cta_secondary: "Apps laden",
-        stat_1: "Lokale Latenz Nordost-BR", stat_2: "Direktroute Fortaleza → Miami",
-        stat_3: "Modernes Leichtgewicht-Protokoll", stat_4: "Geprüfte No-Logs-Richtlinie",
-        feat_title: "Globale Sicherheit mit direktem Seekabel-Routing",
-        feat_sub: "Entwickelt für kompetitive Gamer und digitale Nomaden.",
-        price_title: "Wählen Sie Ihren passenden Tarif",
-        price_sub: "Voller Zugang zum Fortaleza-Hub und 7 Tage Geld-zurück-Garantie.",
-        cycle_monthly: "Monatlich", cycle_annual: "Jährlich (-35%)", cycle_biennial: "2 Jahre (-50%)",
-        badge_popular: "Beliebteste Wahl", per_month: "/Monat", btn_select_plan: "Tarif wählen",
-        dl_title: "Laden Sie die App für alle Ihre Geräte herunter",
-        dl_sub: "Kompatibel mit dem offiziellen WireGuard®-Client.",
-        dl_btn: "Laden (.exe)", footer_rights: "Alle Rechte vorbehalten.",
-        form_name: "Vollständiger Name", form_email: "E-Mail", form_pass: "Passwort"
-      },
-      fr: {
-        nav_features: "Fonctionnalités", nav_pricing: "Tarifs", nav_download: "Télécharger",
-        btn_login: "Connexion", btn_signup: "Créer un compte",
-        hero_badge: "Hub de Câbles Sous-Marins • Fortaleza, Brésil",
-        hero_title: "VPN & Game Booster à <span>Ultra-Basse Latence</span> Directe",
-        hero_sub: "Connectez-vous directement au hub de câbles sous-marins de Fortaleza sans détour par São Paulo. Chiffrement WireGuard nouvelle génération et politique sans journaux.",
-        hero_cta_primary: "Obtenir FortalOps VPN", hero_cta_secondary: "Télécharger",
-        stat_1: "Latence locale Nord-Est BR", stat_2: "Route directe Fortaleza → Miami",
-        stat_3: "Protocole moderne et léger", stat_4: "Politique No-Logs vérifiée",
-        feat_title: "Sécurité mondiale avec routage sous-marin direct",
-        feat_sub: "Conçue pour les joueurs compétitifs et les nomades numériques.",
-        price_title: "Choisissez l'offre adaptée à vos besoins",
-        price_sub: "Accès complet au hub de Fortaleza et garantie de 7 jours.",
-        cycle_monthly: "Mensuel", cycle_annual: "Annuel (-35%)", cycle_biennial: "2 Ans (-50%)",
-        badge_popular: "Le Plus Populaire", per_month: "/mois", btn_select_plan: "Choisir ce forfait",
-        dl_title: "Téléchargez l'application sur tous vos appareils",
-        dl_sub: "Compatible avec le client officiel WireGuard®.",
-        dl_btn: "Télécharger (.exe)", footer_rights: "Tous droits réservés.",
-        form_name: "Nom Complet", form_email: "E-mail", form_pass: "Mot de passe"
-      }
-    };
 
     let currentLang = 'pt';
     let currentCycle = 'monthly';
@@ -468,15 +447,10 @@ const PIX_KEY_DISPLAY = '02874149900';
     let authMode = 'signup';
     let pendingPlanId = null;
 
-    // 1. Carregar Planos do Banco PostgreSQL
     async function loadPlans() {
-      const { data, error } = await sb
-        .from('plans')
-        .select('*')
-        .order('sort_order', { ascending: true });
-
+      const { data, error } = await sb.from('plans').select('*').order('sort_order', { ascending: true });
       if (error) {
-        document.getElementById('dynamicPlansGrid').innerHTML = `<p style="color:var(--danger);text-align:center;grid-column:1/-1;">Erro ao conectar ao Supabase. Verifique se você colou a ANON_KEY correta.</p>`;
+        document.getElementById('dynamicPlansGrid').innerHTML = `<p style="color:var(--danger);text-align:center;grid-column:1/-1;">Erro ao carregar planos: ${error.message}</p>`;
         return;
       }
       cachedPlans = data || [];
@@ -496,28 +470,21 @@ const PIX_KEY_DISPLAY = '02874149900';
     function renderPlans() {
       const grid = document.getElementById('dynamicPlansGrid');
       const activePlans = cachedPlans.filter(p => p.active);
-      const dict = i18n[currentLang];
-
       grid.innerHTML = activePlans.map(plan => {
-        const title = plan.names[currentLang] || plan.names['en'] || plan.names['pt'];
-        const feats = plan.features[currentLang] || plan.features['en'] || plan.features['pt'] || [];
+        const title = plan.names[currentLang] || plan.names['pt'];
+        const feats = plan.features[currentLang] || plan.features['pt'] || [];
         return `
           <div class="plan-card ${plan.is_popular ? 'popular' : ''}">
-            ${plan.is_popular ? `<div class="badge-pop">${dict.badge_popular}</div>` : ''}
+            ${plan.is_popular ? `<div class="badge-pop">Mais Escolhido</div>` : ''}
             <h3>${title}</h3>
-            <div class="plan-price">${calcPrice(plan)} <small>${dict.per_month}</small></div>
-            <ul class="plan-features">
-              ${feats.map(f => `<li>${f}</li>`).join('')}
-            </ul>
-            <button class="btn ${plan.is_popular ? '' : 'btn-ghost'}" onclick="subscribeToPlan('${plan.id}')">
-              ${dict.btn_select_plan}
-            </button>
+            <div class="plan-price">${calcPrice(plan)} <small>/mês</small></div>
+            <ul class="plan-features">${feats.map(f => `<li>${f}</li>`).join('')}</ul>
+            <button class="btn ${plan.is_popular ? '' : 'btn-ghost'}" onclick="subscribeToPlan('${plan.id}')">Assinar Agora (Pix / Cartão)</button>
           </div>
         `;
       }).join('');
     }
 
-    // 2. Fluxo de Assinatura & Autenticação
     async function subscribeToPlan(planId) {
       if (!currentUser) {
         pendingPlanId = planId;
@@ -536,10 +503,7 @@ const PIX_KEY_DISPLAY = '02874149900';
         currency: currency,
         status: 'pending_payment'
       });
-      if (error) {
-        alert('Erro ao registrar assinatura: ' + error.message);
-        return;
-      }
+      if (error) { alert('Erro ao registrar assinatura: ' + error.message); return; }
       pendingPlanId = null;
       await loadUserDashboard();
       document.getElementById('dashboardSection').scrollIntoView({ behavior: 'smooth' });
@@ -549,13 +513,15 @@ const PIX_KEY_DISPLAY = '02874149900';
       authMode = mode;
       document.getElementById('authFeedback').innerText = '';
       document.getElementById('nameGroup').style.display = mode === 'login' ? 'none' : 'block';
+      document.getElementById('termsGroup').style.display = mode === 'login' ? 'none' : 'flex';
+      document.getElementById('acceptContract').required = mode !== 'login';
       document.getElementById('modalTitle').innerText = mode === 'login' ? 'Entrar na FortalOps' : 'Criar Conta FortalOps';
       document.getElementById('authModal').classList.add('open');
     }
 
-    function closeAuth() {
-      document.getElementById('authModal').classList.remove('open');
-    }
+    function closeAuth() { document.getElementById('authModal').classList.remove('open'); }
+    function openContract() { document.getElementById('contractModal').classList.add('open'); }
+    function closeContract() { document.getElementById('contractModal').classList.remove('open'); }
 
     async function handleAuthSubmit(e) {
       e.preventDefault();
@@ -567,19 +533,18 @@ const PIX_KEY_DISPLAY = '02874149900';
       fb.innerText = 'Processando...';
 
       if (authMode === 'signup') {
-        const { data, error } = await sb.auth.signUp({
-          email,
-          password,
-          options: { data: { full_name: fullName, preferred_lang: currentLang } }
+        const { error } = await sb.auth.signUp({
+          email, password,
+          options: { data: { full_name: fullName, preferred_lang: currentLang, accepted_terms_at: new Date().toISOString() } }
         });
         if (error) { fb.style.color = 'var(--danger)'; fb.innerText = error.message; return; }
         fb.style.color = 'var(--accent)';
-        fb.innerText = '✓ Conta criada com sucesso!';
+        fb.innerText = '✓ Conta criada e contrato aceito com sucesso!';
         setTimeout(async () => {
           closeAuth();
           await checkSession();
           if (pendingPlanId) await createSubscriptionRecord(pendingPlanId);
-        }, 900);
+        }, 800);
       } else {
         const { error } = await sb.auth.signInWithPassword({ email, password });
         if (error) { fb.style.color = 'var(--danger)'; fb.innerText = error.message; return; }
@@ -590,14 +555,12 @@ const PIX_KEY_DISPLAY = '02874149900';
 
     async function logout() {
       await sb.auth.signOut();
-      currentUser = null;
-      currentProfile = null;
+      currentUser = null; currentProfile = null;
       document.getElementById('guestActions').style.display = 'flex';
       document.getElementById('userActions').style.display = 'none';
       document.getElementById('dashboardSection').style.display = 'none';
     }
 
-    // 3. Sessão, Perfil e Painéis (Cliente + Admin)
     async function checkSession() {
       const { data: { session } } = await sb.auth.getSession();
       if (!session) return;
@@ -625,7 +588,6 @@ const PIX_KEY_DISPLAY = '02874149900';
         badge.classList.remove('admin');
         document.getElementById('adminPanel').style.display = 'none';
       }
-
       await loadUserDashboard();
     }
 
@@ -638,7 +600,7 @@ const PIX_KEY_DISPLAY = '02874149900';
 
       const container = document.getElementById('clientSubscriptionsList');
       if (!subs || subs.length === 0) {
-        container.innerHTML = `<p>Você ainda não possui nenhum plano ativo. <a href="#pricing" style="color:var(--primary);">Escolha um plano abaixo</a> para começar.</p>`;
+        container.innerHTML = `<p>Você ainda não possui nenhum plano ativo. <a href="#pricing" style="color:var(--primary);">Escolha entre VPN Segura ou VPN Desempenho abaixo</a>.</p>`;
         return;
       }
 
@@ -648,20 +610,19 @@ const PIX_KEY_DISPLAY = '02874149900';
         return `
           <div style="border: 1px solid var(--border); padding: 16px; border-radius: 10px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
             <div>
-              <strong>${pName}</strong> (${s.billing_cycle.toUpperCase()}) • Até ${s.plans?.max_devices || 2} dispositivos
+              <strong>${pName}</strong> (${s.billing_cycle.toUpperCase()}) • Até ${s.plans?.max_devices || 3} dispositivos
               <div style="margin-top: 6px;">
                 <span class="status-pill ${isPending ? 'st-pending' : 'st-active'}">
-                  ${isPending ? '⏳ Aguardando Pagamento Pix' : '✅ Ativo (Servidor Fortaleza-CE)'}
+                  ${isPending ? '⏳ Aguardando Pagamento' : '✅ Ativo (Data Center Tier III • Fortaleza-CE)'}
                 </span>
               </div>
-              ${isPending ? `<p style="font-size: 0.85rem; color: var(--muted); margin-top: 8px;">Chave Pix para ativação imediata: <strong style="color:var(--text);">${PIX_KEY_DISPLAY}</strong></p>` : `<p style="font-size: 0.85rem; color: var(--accent); margin-top: 8px;">Seu túnel WireGuard está liberado para configuração.</p>`}
+              ${isPending ? `<p style="font-size: 0.85rem; color: var(--muted); margin-top: 8px;">Chave Pix imediata: <strong style="color:var(--text);">${PIX_KEY_DISPLAY}</strong> <button class="btn btn-ghost btn-sm" style="margin-left:8px;" onclick="navigator.clipboard.writeText('${PIX_KEY_DISPLAY}');alert('Chave Pix copiada!')">Copiar Pix</button></p>` : `<p style="font-size: 0.85rem; color: var(--accent); margin-top: 8px;">Túnel WireGuard® Zero-Logs liberado.</p>`}
             </div>
           </div>
         `;
       }).join('');
     }
 
-    // 4. Funções Exclusivas do Administrador
     function toggleNewPlanForm() {
       const f = document.getElementById('newPlanForm');
       f.style.display = f.style.display === 'none' ? 'block' : 'none';
@@ -682,12 +643,9 @@ const PIX_KEY_DISPLAY = '02874149900';
         slug,
         names: { pt: namePt, en: nameEn, it: nameEn, de: nameEn, fr: nameEn },
         features: { pt: featPt, en: featEn, it: featEn, de: featEn, fr: featEn },
-        price_brl_monthly: priceBrl,
-        price_usd_monthly: priceUsd,
-        max_devices: maxDevices,
-        sort_order: cachedPlans.length + 1
+        price_brl_monthly: priceBrl, price_usd_monthly: priceUsd,
+        max_devices: maxDevices, sort_order: cachedPlans.length + 1
       });
-
       if (error) { alert('Erro ao salvar plano: ' + error.message); return; }
       e.target.reset();
       toggleNewPlanForm();
@@ -708,11 +666,7 @@ const PIX_KEY_DISPLAY = '02874149900';
           <td>$ ${Number(p.price_usd_monthly).toFixed(2)}</td>
           <td>${p.max_devices}</td>
           <td><span class="status-pill ${p.active ? 'st-active' : 'st-pending'}">${p.active ? 'Ativo' : 'Oculto'}</span></td>
-          <td>
-            <button class="btn btn-ghost btn-sm" onclick="togglePlanStatus('${p.id}', ${p.active})">
-              ${p.active ? 'Desativar' : 'Ativar'}
-            </button>
-          </td>
+          <td><button class="btn btn-ghost btn-sm" onclick="togglePlanStatus('${p.id}', ${p.active})">${p.active ? 'Desativar' : 'Ativar'}</button></td>
         </tr>
       `).join('');
     }
@@ -730,31 +684,22 @@ const PIX_KEY_DISPLAY = '02874149900';
           <td>${s.plans?.names?.pt || '-'}</td>
           <td>${s.billing_cycle}</td>
           <td><span class="status-pill ${s.status === 'active' ? 'st-active' : 'st-pending'}">${s.status}</span></td>
-          <td>
-            ${s.status !== 'active' ? `<button class="btn btn-accent btn-sm" onclick="approveSubscription('${s.id}')">Aprovar Pagamento</button>` : '✓ Liberado'}
-          </td>
+          <td>${s.status !== 'active' ? `<button class="btn btn-accent btn-sm" onclick="approveSubscription('${s.id}')">Aprovar Pagamento</button>` : '✓ Liberado'}</td>
         </tr>
       `).join('');
     }
 
     async function approveSubscription(subId) {
       const { error } = await sb.from('subscriptions').update({
-        status: 'active',
-        current_period_start: new Date().toISOString()
+        status: 'active', current_period_start: new Date().toISOString()
       }).eq('id', subId);
       if (error) { alert(error.message); return; }
       await loadAdminSubscriptions();
       await loadUserDashboard();
     }
 
-    // Troca de Idioma e Ciclo
     document.getElementById('langSelector').addEventListener('change', (e) => {
       currentLang = e.target.value;
-      const dict = i18n[currentLang];
-      document.querySelectorAll('[data-i18n]').forEach(el => {
-        const k = el.getAttribute('data-i18n');
-        if (dict[k]) el.innerHTML = dict[k];
-      });
       renderPlans();
     });
 
@@ -765,7 +710,6 @@ const PIX_KEY_DISPLAY = '02874149900';
       renderPlans();
     }
 
-    // Inicialização
     (async () => {
       await loadPlans();
       await checkSession();
