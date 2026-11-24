@@ -53,6 +53,27 @@ export class FortalOpsAPI {
     return data || [];
   }
 
+  async fetchUserPayments(userId) {
+    const { data } = await this.sb
+      .from('payments')
+      .select('*')
+      .eq('user_id', userId)
+      .order('created_at', { ascending: false });
+    return data || [];
+  }
+
+  async cancelSubscription(subId, isRefundWithin7Days) {
+    const { error } = await this.sb
+      .from('subscriptions')
+      .update({
+        status: isRefundWithin7Days ? 'refund_requested' : 'canceled',
+        canceled_at: new Date().toISOString(),
+        cancel_reason: isRefundWithin7Days ? '7_day_guarantee' : 'user_canceled'
+      })
+      .eq('id', subId);
+    if (error) throw error;
+  }
+
   async createCheckoutSession({ planId, billingCycle, provider }) {
     const fnName = provider === 'paypal' ? 'create-paypal-checkout' : 'create-mp-checkout';
     const { data, error } = await this.sb.functions.invoke(fnName, {
