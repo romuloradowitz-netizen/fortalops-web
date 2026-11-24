@@ -14,6 +14,7 @@ class FortalOpsApp {
 
     this.currentCycle = 'monthly';
     this.cachedPlans = [];
+    this.cachedUserSubs = [];
     this.currentUser = null;
     this.currentProfile = null;
     this.authMode = 'signup';
@@ -36,8 +37,8 @@ class FortalOpsApp {
       this.translator.setLanguage(e.target.value);
       this.ui.renderPlans(this.cachedPlans, this.currentCycle);
       if (this.currentUser) {
-        const subs = await this.api.fetchUserSubscriptions(this.currentUser.id);
-        this.ui.renderUserSubscriptions(subs);
+        this.cachedUserSubs = await this.api.fetchUserSubscriptions(this.currentUser.id);
+        this.ui.renderUserSubscriptions(this.cachedUserSubs);
         const payments = await this.api.fetchUserPayments(this.currentUser.id);
         this.ui.renderUserPayments(payments);
       }
@@ -56,6 +57,44 @@ class FortalOpsApp {
       const subBtn = e.target.closest('[data-subscribe-plan]');
       if (subBtn) {
         await this.startCheckout(subBtn.dataset.subscribePlan, subBtn.dataset.provider);
+        return;
+      }
+
+      const openUpgBtn = e.target.closest('[data-open-upgrade]');
+      if (openUpgBtn) {
+        const sub = this.cachedUserSubs.find((s) => s.id === openUpgBtn.dataset.openUpgrade);
+        const targetPlan = this.cachedPlans.find((p) => p.slug === 'vpn-desempenho' && p.active);
+        if (sub && targetPlan) {
+          this.ui.openUpgradeModal(sub, targetPlan);
+        }
+        return;
+      }
+
+      const confirmUpgBtn = e.target.closest('[data-confirm-upgrade]');
+      if (confirmUpgBtn) {
+        const subId = confirmUpgBtn.dataset.confirmUpgrade;
+        const targetPlanId = confirmUpgBtn.dataset.targetPlan;
+        const provider = confirmUpgBtn.dataset.provider;
+        const prorata = parseFloat(confirmUpgBtn.dataset.prorata);
+        const sub = this.cachedUserSubs.find((s) => s.id === subId);
+
+        try {
+          const checkoutUrl = await this.api.createCheckoutSession({
+            planId: targetPlanId,
+            billingCycle: sub?.billing_cycle || 'monthly',
+            provider,
+            upgradeSubscriptionId: subId,
+            prorataAmount: prorata
+          });
+          window.location.href = checkoutUrl;
+        } catch (err) {
+          alert(err.message);
+        }
+        return;
+      }
+
+      if (e.target.closest('[data-close-upgrade]')) {
+        this.ui.closeUpgradeModal();
         return;
       }
 
@@ -216,6 +255,7 @@ class FortalOpsApp {
     await this.api.signOut();
     this.currentUser = null;
     this.currentProfile = null;
+    this.cachedUserSubs = [];
     document.getElementById('guestActions').style.display = 'flex';
     document.getElementById('userActions').style.display = 'none';
     document.getElementById('dashboardSection').style.display = 'none';
@@ -249,8 +289,8 @@ class FortalOpsApp {
       document.getElementById('adminPanel').style.display = 'none';
     }
 
-    const userSubs = await this.api.fetchUserSubscriptions(this.currentUser.id);
-    this.ui.renderUserSubscriptions(userSubs);
+    this.cachedUserSubs = await this.api.fetchUserSubscriptions(this.currentUser.id);
+    this.ui.renderUserSubscriptions(this.cachedUserSubs);
 
     const userPayments = await this.api.fetchUserPayments(this.currentUser.id);
     this.ui.renderUserPayments(userPayments);
