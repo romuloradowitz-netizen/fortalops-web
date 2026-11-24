@@ -14,6 +14,19 @@ export class DashboardUI {
     return lang === 'pt' ? `R$ ${finalVal.replace('.', ',')}` : `$ ${finalVal}`;
   }
 
+  calculateRenewalDate(sub) {
+    const start = new Date(sub.current_period_start || sub.created_at);
+    const months = sub.billing_cycle === 'biennial' ? 24 : sub.billing_cycle === 'annual' ? 12 : 1;
+    start.setMonth(start.getMonth() + months);
+    return start.toLocaleDateString(this.translator.lang);
+  }
+
+  isWithin7Days(sub) {
+    const created = new Date(sub.current_period_start || sub.created_at);
+    const diffDays = (Date.now() - created.getTime()) / (1000 * 60 * 60 * 24);
+    return diffDays <= 7;
+  }
+
   renderPlans(plans, billingCycle) {
     const grid = document.getElementById('dynamicPlansGrid');
     const lang = this.translator.lang;
@@ -68,22 +81,72 @@ export class DashboardUI {
     container.innerHTML = subs.map((s) => {
       const pName = s.plans?.names?.[lang] || s.plans?.names?.en || s.plans?.names?.pt || 'FortalOps VPN';
       const isPending = s.status === 'pending_payment';
+      const isActive = s.status === 'active';
+      const canRefund = isActive && this.isWithin7Days(s);
+      const renewalDate = this.calculateRenewalDate(s);
+
+      let statusHtml = `<span class="status-pill st-pending">⏳ ${s.status}</span>`;
+      if (isActive) {
+        statusHtml = `<span class="status-pill st-active">✅ Active (Data Center Tier III • Fortaleza-CE)</span>`;
+      } else if (s.status === 'canceled' || s.status === 'refund_requested') {
+        statusHtml = `<span class="status-pill" style="background:rgba(239,68,68,0.15);color:var(--danger);">✕ ${this.translator.t('sub_canceled_lbl')} (${s.status})</span>`;
+      }
+
       return `
         <div style="border: 1px solid var(--border); padding: 16px; border-radius: 10px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
           <div>
             <strong>${pName}</strong> (${s.billing_cycle.toUpperCase()}) • ${s.plans?.max_devices || 3} ${this.translator.t('devices_lbl')}
-            <div style="margin-top: 6px;">
-              <span class="status-pill ${isPending ? 'st-pending' : 'st-active'}">
-                ${isPending ? '⏳ Pending Payment' : '✅ Active (Data Center Tier III • Fortaleza-CE)'}
-              </span>
-            </div>
+            <div style="margin-top: 6px;">${statusHtml}</div>
+            ${isActive ? `<p style="font-size: 0.84rem; color: var(--muted); margin-top: 6px;">${this.translator.t('sub_renews')} <strong style="color:var(--text);">${renewalDate}</strong></p>` : ''}
             ${isPending
               ? `<p style="font-size: 0.85rem; color: var(--muted); margin-top: 8px;">Pix (BRL): <strong style="color:var(--text);">${this.pixKeyDisplay}</strong> <button class="btn btn-ghost btn-sm" style="margin-left:8px;" data-copy-pix="${this.pixKeyDisplay}">Copy Pix</button></p>`
-              : `<p style="font-size: 0.85rem; color: var(--accent); margin-top: 8px;">WireGuard® Zero-Logs Tunnel Ready.</p>`}
+              : isActive ? `<p style="font-size: 0.85rem; color: var(--accent); margin-top: 4px;">WireGuard® Zero-Logs Tunnel Ready.</p>` : ''}
           </div>
+          ${isActive ? `
+            <div>
+              <button class="btn btn-ghost btn-sm" style="border-color: var(--danger); color: var(--danger);" data-cancel-sub="${s.id}" data-refund-7d="${canRefund}">
+                ${canRefund ? this.translator.t('btn_refund_7d') : this.translator.t('btn_cancel_sub')}
+              </button>
+            </div>
+          ` : ''}
         </div>
       `;
     }).join('');
+  }
+
+  renderUserPayments(payments) {
+    const container = document.getElementById('clientPaymentsList');
+    if (!container) return;
+
+    if (!payments || payments.length === 0) {
+      container.innerHTML = `<p style="color: var(--muted); font-size: 0.9rem;">${this.translator.t('no_invoices')}</p>`;
+      return;
+    }
+
+    container.innerHTML = `
+      <div style="overflow-x: auto;">
+        <table>
+          <thead>
+            <tr>
+              <th>${this.translator.t('inv_date')}</th>
+              <th>${this.translator.t('inv_provider')}</th>
+              <th>${this.translator.t('inv_amount')}</th>
+              <th>${this.translator.t('inv_status')}</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${payments.map((p) => `
+              <tr>
+                <td>${new Date(p.created_at).toLocaleDateString(this.translator.lang)}</td>
+                <td style="text-transform: uppercase;">${p.provider}</td>
+                <td><strong>${p.currency === 'USD' ? '$' : 'R$'} ${Number(p.amount).toFixed(2)}</strong></td>
+                <td><span class="status-pill st-active">${p.status}</span></td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      </div>
+    `;
   }
 
   renderAdminPlans(plans) {
