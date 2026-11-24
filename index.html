@@ -54,6 +54,7 @@
         <h3 style="margin-bottom: 12px;" data-i18n="dash_subs_title">Minhas Assinaturas & Acesso VPN (Data Center Tier III • Fortaleza-CE)</h3>
         <div id="clientSubscriptionsList" style="color: var(--muted);">Carregando assinaturas...</div>
       </div>
+
       <div class="dash-box">
         <h3 style="margin-bottom: 12px;" data-i18n="dash_invoices_title">🧾 Histórico de Faturas & Pagamentos</h3>
         <div id="clientPaymentsList" style="color: var(--muted);">Carregando faturas...</div>
@@ -118,16 +119,17 @@
         <a href="#pricing" class="btn btn-lg" data-i18n="hero_cta_1">Assinar FortalOps VPN</a>
         <a href="#produtos" class="btn btn-ghost btn-lg" data-i18n="hero_cta_2">Conhecer VPN Segura & Desempenho</a>
       </div>
-<!-- Mapa Submarino Interativo FortalOps -->
+
+      <!-- Mapa Submarino Interativo FortalOps -->
       <div class="subsea-map-wrapper">
         <div class="subsea-map-header">
           <div style="font-weight: 700; color: var(--text);">
-            🌐 <span data-i18n="map_title">FortalOps Global Subsea Backbone • Fortaleza-CE (Tier III)</span>
+            🌐 <span data-i18n="map_title">Backbone Submarino Global FortalOps • Fortaleza-CE (Tier III)</span>
           </div>
           <div class="map-legend">
-            <span class="legend-item"><i class="dot-cyan"></i> <span data-i18n="map_leg_direct">Direct Subsea Route (FortalOps)</span></span>
-            <span class="legend-item"><i class="dot-green"></i> <span data-i18n="map_leg_hub">Tier III Hub (Fortaleza-CE)</span></span>
-            <span class="legend-item"><i class="dot-red"></i> <span data-i18n="map_leg_detour">Standard ISP Detour (+60ms via SP)</span></span>
+            <span class="legend-item"><i class="dot-cyan"></i> <span data-i18n="map_leg_direct">Rota Submarina Direta (FortalOps)</span></span>
+            <span class="legend-item"><i class="dot-green"></i> <span data-i18n="map_leg_hub">Hub Tier III (Fortaleza-CE)</span></span>
+            <span class="legend-item"><i class="dot-red"></i> <span data-i18n="map_leg_detour">Desvio Operadora Comum (+60ms via SP)</span></span>
           </div>
         </div>
 
@@ -144,7 +146,6 @@
             </linearGradient>
           </defs>
 
-          <!-- Fundo Oceânico e Grade -->
           <rect width="1000" height="430" rx="12" fill="#070d19" />
           <circle cx="365" cy="255" r="320" fill="url(#oceanGlow)" />
           <g stroke="#1e293b" stroke-width="0.7" opacity="0.55">
@@ -158,17 +159,13 @@
             <line x1="800" y1="0" x2="800" y2="430" />
           </g>
 
-          <!-- Silhuetas Estilizadas dos Continentes -->
-          <!-- América do Norte -->
+          <!-- Continentes -->
           <path d="M70 40 L255 35 L285 95 L230 145 L175 168 L145 150 L95 115 Z" fill="#111c33" stroke="#1e293b" stroke-width="1.5" />
-          <!-- América do Sul -->
           <path d="M250 198 L330 205 L385 250 L365 325 L310 400 L275 395 L265 310 L235 245 Z" fill="#13223d" stroke="#06b6d4" stroke-opacity="0.35" stroke-width="1.5" />
-          <!-- Europa -->
           <path d="M565 45 L735 35 L765 95 L695 130 L600 135 L570 105 Z" fill="#111c33" stroke="#1e293b" stroke-width="1.5" />
-          <!-- África -->
           <path d="M565 158 L705 155 L765 225 L730 355 L665 375 L630 280 L555 230 Z" fill="#111c33" stroke="#1e293b" stroke-width="1.5" />
 
-          <!-- Rota Lenta Tradicional (Desvio via São Paulo) -->
+          <!-- Rota Lenta via São Paulo -->
           <path d="M365 255 Q360 305 322 332" stroke="#ef4444" stroke-width="1.8" stroke-dasharray="5 5" opacity="0.7" />
           <path d="M322 332 Q210 265 198 148" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="5 5" opacity="0.55" />
           <circle cx="322" cy="332" r="4.5" fill="#ef4444" />
@@ -176,23 +173,19 @@
           <text x="256" y="339" fill="#fca5a5" font-size="10.5" font-weight="700" text-anchor="middle">São Paulo (+60ms)</text>
 
           <!-- Cabos Submarinos Diretos FortalOps -->
-          <!-- 1. Fortaleza -> Miami (Monet) -->
           <path d="M365 255 C315 195, 255 168, 198 148" stroke="#06b6d4" stroke-width="4" opacity="0.22" />
           <path d="M365 255 C315 195, 255 168, 198 148" stroke="url(#cableCyan)" stroke-width="2.5" class="cable-flow-fast" />
 
-          <!-- 2. Fortaleza -> New York (Seabras-1) -->
           <path d="M365 255 C345 170, 295 120, 245 96" stroke="#06b6d4" stroke-width="4" opacity="0.22" />
           <path d="M365 255 C345 170, 295 120, 245 96" stroke="url(#cableCyan)" stroke-width="2.5" class="cable-flow" />
 
-          <!-- 3. Fortaleza -> Europa / Lisboa & Madrid (EllaLink) -->
           <path d="M365 255 C445 180, 515 140, 592 114" stroke="#06b6d4" stroke-width="4" opacity="0.22" />
           <path d="M365 255 C445 180, 515 140, 592 114" stroke="url(#cableCyan)" stroke-width="2.8" class="cable-flow-fast" />
 
-          <!-- 4. Fortaleza -> África / Luanda (SACS) -->
           <path d="M365 255 C475 275, 575 285, 672 288" stroke="#06b6d4" stroke-width="4" opacity="0.22" />
           <path d="M365 255 C475 275, 575 285, 672 288" stroke="url(#cableCyan)" stroke-width="2.5" class="cable-flow" />
 
-          <!-- Etiquetas dos Cabos no Oceano -->
+          <!-- Etiquetas dos Cabos -->
           <rect x="232" y="186" width="84" height="19" rx="4" fill="#0f172a" stroke="#06b6d4" stroke-opacity="0.45" />
           <text x="274" y="199" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">Monet Cable</text>
 
@@ -205,37 +198,33 @@
           <rect x="485" y="264" width="84" height="19" rx="4" fill="#0f172a" stroke="#06b6d4" stroke-opacity="0.45" />
           <text x="527" y="277" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">SACS Direct</text>
 
-          <!-- Nós de Destino (USA, Europa, África) -->
-          <!-- New York -->
+          <!-- Destinos -->
           <circle cx="245" cy="96" r="5" fill="#06b6d4" />
           <rect x="122" y="74" width="114" height="24" rx="6" fill="#0f172a" stroke="#38bdf8" stroke-width="1" />
           <text x="179" y="90" fill="#f8fafc" font-size="11" font-weight="700" text-anchor="middle">🇺🇸 New York (USA)</text>
 
-          <!-- Miami -->
           <circle cx="198" cy="148" r="5" fill="#06b6d4" />
           <rect x="86" y="136" width="102" height="24" rx="6" fill="#0f172a" stroke="#38bdf8" stroke-width="1" />
           <text x="137" y="152" fill="#f8fafc" font-size="11" font-weight="700" text-anchor="middle">🇺🇸 Miami (USA)</text>
 
-          <!-- Europa -->
           <circle cx="592" cy="114" r="5.5" fill="#06b6d4" />
           <rect x="604" y="96" width="142" height="24" rx="6" fill="#0f172a" stroke="#38bdf8" stroke-width="1" />
           <text x="675" y="112" fill="#f8fafc" font-size="11" font-weight="700" text-anchor="middle">🇪🇺 Lisbon / Madrid (EU)</text>
 
-          <!-- África -->
           <circle cx="672" cy="288" r="5" fill="#06b6d4" />
           <rect x="684" y="276" width="124" height="24" rx="6" fill="#0f172a" stroke="#38bdf8" stroke-width="1" />
           <text x="746" y="292" fill="#f8fafc" font-size="11" font-weight="700" text-anchor="middle">🇦🇴 Luanda (Africa)</text>
 
-          <!-- NÓ CENTRAL: FORTALEZA-CE (TIER III) -->
+          <!-- Hub Fortaleza-CE -->
           <circle cx="365" cy="255" r="14" fill="#10b981" opacity="0.35" class="pulse-ring" />
           <circle cx="365" cy="255" r="8" fill="#10b981" stroke="#ffffff" stroke-width="2" />
 
-          <!-- Card de Destaque Fortaleza-CE -->
           <rect x="382" y="226" width="212" height="44" rx="8" fill="#042f2e" stroke="#10b981" stroke-width="1.6" />
           <text x="488" y="244" fill="#10b981" font-size="11.5" font-weight="800" text-anchor="middle">🇧🇷 FORTALEZA-CE (HUB)</text>
           <text x="488" y="260" fill="#ecfdf5" font-size="10" font-weight="600" text-anchor="middle">FortalOps Tier III Data Center</text>
         </svg>
       </div>
+
       <div class="trust-grid">
         <div class="trust-item"><strong>Tier III</strong><span data-i18n="trust_1">Data Center de alta segurança em Fortaleza-CE</span></div>
         <div class="trust-item"><strong data-i18n="trust_2_val">+16 Cabos</strong><span data-i18n="trust_2">Conexão direta com EUA, Europa e África</span></div>
@@ -416,7 +405,7 @@
         <p>• <strong>Não registramos nem armazenamos:</strong> histórico de sites visitados, conteúdo de tráfego, consultas DNS, endereços IP de origem da conexão, carimbos de data/hora de sessão VPN ou largura de banda individualizada por destino.</p>
         <p>• <strong>Dados mínimos de operação:</strong> Mantemos apenas os dados estritamente necessários para gestão da conta e cobrança (e-mail, plano contratado, status financeiro e contagem simultânea de chaves WireGuard® ativas para cumprimento do limite do plano), em conformidade com a Lei Geral de Proteção de Dados (LGPD — Lei nº 13.709/2018).</p>
 
-        <h4>5. INFRAESTRUTURA TIER III E DISPONIBILIDADE</h4>
+        <h4>5. INFRAESTRURA TIER III E DISPONIBILIDADE</h4>
         <p>Os servidores VPN operam em Data Center padrão Tier III em Fortaleza-CE com redundância de energia e conectividade. Eventuais janelas de manutenção preventiva serão comunicadas previamente no painel do assinante. A velocidade final percebida depende também da qualidade da conexão local do provedor de internet (ISP) do Assinante.</p>
 
         <h4>6. PAGAMENTOS, SEGURANÇA PCI-DSS E DIREITO DE ARREPENDIMENTO</h4>
