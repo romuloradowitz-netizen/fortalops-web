@@ -185,4 +185,156 @@ export const DICTIONARIES = {
   de: {
     nav_hub: "Fortaleza Hub", nav_products: "Sicheres & Leistungs-VPN", nav_pricing: "Tarife", nav_contract: "Vertrag & No-Logs",
     btn_login: "Anmelden", btn_signup: "Registrieren", nav_account: "Mein Konto", btn_logout: "Abmelden",
-    dash_
+    dash_subs_title: "Meine Abonnements & VPN-Zugang (Tier-III-Rechenzentrum • Fortaleza)",
+    dash_invoices_title: "🧾 Rechnungs- & Zahlungsverlauf",
+    no_invoices: "Noch keine bestätigten Rechnungen vorhanden.",
+    inv_date: "Datum", inv_provider: "Anbieter", inv_amount: "Betrag", inv_status: "Status",
+    sub_renews: "Gültig bis / Verlängerung:",
+    btn_cancel_sub: "Abonnement kündigen",
+    btn_refund_7d: "Rückerstattung anfordern (7-Tage-Garantie)",
+    sub_canceled_lbl: "Gekündigt",
+    confirm_cancel: "Möchten Sie dieses Abonnement wirklich kündigen?",
+    confirm_refund: "Kündigung mit voller Rückerstattung (7-Tage-Geld-zurück-Garantie) anfordern?",
+    cancel_success: "Anfrage erfolgreich übermittelt!",
+    pill_1: "🇧🇷 Brasilianisches VPN in Fortaleza", pill_2: "🏢 Zertifiziertes Tier-III-Rechenzentrum", pill_3: "🌊 Internationaler Seekabel-Knotenpunkt", pill_4: "🔒 Strikte Zero-Logs-Richtlinie",
+    hero_title: "Brasilianisches VPN im <span>Herzen der Seekabel</span> von Fortaleza",
+    hero_sub: "Betrieben in einem <strong>Tier-III-Rechenzentrum</strong> in Fortaleza — Südamerikas größtem Seekabel-Knotenpunkt. Wählen Sie zwischen <strong>Sicheres VPN</strong> (maximale Privatsphäre & echte brasilianische IP) oder <strong>Leistungs-VPN</strong> (direktes Routing ohne Umweg über São Paulo). Strikt ohne Traffic-Logs.",
+    hero_cta_1: "FortalOps VPN starten", hero_cta_2: "Sicheres & Leistungs-VPN ansehen",
+    map_title: "FortalOps Globales Seekabel-Backbone • Fortaleza-CE (Tier III)",
+    map_leg_direct: "Direkte Seekabel-Route (FortalOps)",
+    map_leg_hub: "Tier-III-Hub (Fortaleza-CE)",
+    map_leg_detour: "Standard-ISP-Umweg (+60ms via SP)",
+    trust_1: "Hochsicheres Rechenzentrum in Fortaleza, Brasilien", trust_2_val: "16+ Seekabel", trust_2: "Direkte Anbindung an USA, Europa & Afrika",
+    trust_3: "Keine Traffic-Logs oder Browserverläufe", trust_4: "PCI-DSS-gesicherter Checkout (PayPal & Karte)",
+    hub_tag: "Geografischer Vorteil & Netzwerktechnik", hub_title: "Warum ist Fortaleza der strategische Internet-Knotenpunkt Brasiliens?",
+    hub_p1: "In Fortaleza landen über ein Dutzend interkontinentale Seekabel nach Nordamerika, Europa und Afrika. Herkömmliche Anbieter leiten Daten oft erst nach São Paulo um — das kostet bis zu <strong>+60 ms unnötige Latenz</strong>.",
+    hub_p2: "Mit <strong>FortalOps-Servern im Tier-III-Rechenzentrum in Fortaleza</strong> nehmen Ihre Daten den kürzesten Weg des Kontinents mit redundanter Stromversorgung und 24/7-Sicherheit.",
+    hub_box_title: "🛡️ Infrastruktur- & Zahlungssicherheit",
+    hub_li_1: "<strong>Tier-III-Rechenzentrum (Fortaleza):</strong> 99,982 % Verfügbarkeit, biometrische Zugangskontrolle und N+1-Stromredundanz.",
+    hub_li_2: "<strong>Strikte No-Logs-Richtlinie:</strong> WireGuard®-Server arbeiten im RAM ohne Speicherung von Domains, DNS oder IP-Adressen.",
+    hub_li_3: "<strong>PCI-DSS-Checkout:</strong> Zahlungen laufen über PayPal und Mercado Pago. FortalOps speichert niemals Kartendaten.",
+    prod_sec_title: "Zwei spezialisierte Produkte. Eine Tier-III-Basis in Fortaleza.",
+    prod_sec_sub: "Wählen Sie den passenden Tunnel — beide mit moderner WireGuard®-Verschlüsselung und Zero-Logs-Garantie.",
+    prod1_tag: "Produkt 01 • Privatsphäre & Mobilität", prod1_title: "🛡️ Sicheres VPN",
+    prod1_desc: "Ideal für öffentliches WLAN, Remote-Arbeit und Reisende im Ausland, die eine <strong>echte brasilianische IP-Adresse</strong> benötigen.",
+    prod1_li1: "<strong>Echte brasilianische IP (Fortaleza):</strong> Zugriff auf brasilianische Banken, Gov.br und lokale Streams.",
+    prod1_li2: "<strong>ChaCha20-Poly1305-Verschlüsselung:</strong> Geschützter Tunnel in Flughäfen, Hotels und Cafés.",
+    prod1_li3: "<strong>Zero-Logs-Garantie:</strong> Technisch und vertraglich zugesicherte Privatsphäre.",
+    prod1_li4: "<strong>Kill Switch & DNS-Leak-Schutz.</strong>",
+    prod2_tag: "Produkt 02 • Niedrige Latenz & Seekabel", prod2_title: "⚡ Leistungs-VPN",
+    prod2_desc: "Entwickelt für Gamer und Trader, die <strong>direktes Routing über internationale Seekabel</strong> verlangen.",
+    prod2_li1: "<strong>Direktes Seekabel-Routing:</strong> Ohne Umweg über São Paulo direkt nach Miami, New York und Europa.",
+    prod2_li2: "<strong>Anti-Jitter & Null Paketverlust:</strong> Optimierte MTU- und UDP-Priorisierung für Online-Sessions.",
+    prod2_li3: "<strong>Tier-III-Rechenzentrum in Fortaleza:</strong> Hochleistungs-Backbone mit direktem Peering.",
+    prod2_li4: "<strong>Intelligentes Split Tunneling:</strong> Leiten Sie nur Ihr Spiel oder Ihre App durch den VPN-Tunnel.",
+    nologs_title: "🔒 Öffentliches Zero-Logs-Versprechen (No-Logs)",
+    nologs_desc: "FortalOps <strong>erhebt, speichert oder überwacht keine</strong> Browserverläufe, Datenströme, DNS-Anfragen oder Quell-IP-Adressen.",
+    nologs_btn: "📄 Standardvertrag & No-Logs-Richtlinie lesen",
+    price_title: "FortalOps Tarife (Sicheres VPN & Leistungs-VPN)",
+    price_sub: "Sichere Zahlung via PayPal (USD International) oder Mercado Pago (BRL). 7 Tage Geld-zurück-Garantie.",
+    cycle_monthly: "Monatlich", cycle_annual: "Jährlich (-35%)", cycle_biennial: "2 Jahre (-50%)",
+    per_month: "/Monat", popular_badge: "Beliebteste Wahl", devices_lbl: "Geräte",
+    btn_mp: "Mercado Pago (BRL)", btn_paypal: "PayPal (USD / International)",
+    dl_title: "Offiziellen WireGuard®-Client herunterladen", dl_sub: "Verbinden Sie sich in Sekunden per QR-Code mit dem Tier-III-Rechenzentrum Fortaleza.", dl_win: "Herunterladen (.exe)",
+    footer_infra: "Tier-III-Infrastruktur • Fortaleza, Ceará, Brasilien.", footer_terms: "Nutzungsvertrag", footer_nologs: "No-Logs-Richtlinie",
+    auth_sub: "Sofortiger Zugang zum Portal und zur Tier-III-Infrastruktur in Fortaleza.", auth_name: "Vollständiger Name", auth_email: "E-Mail", auth_pass: "Passwort (mind. 6 Zeichen)",
+    auth_terms: "Ich akzeptiere den <a href='#' data-open-contract style='color: var(--primary);'>Standardvertrag</a> und die <strong>Zero-Logs-Richtlinie</strong>.",
+    auth_btn: "Weiter", modal_login: "Bei FortalOps anmelden", modal_signup: "FortalOps-Konto erstellen",
+    pay_success_msg: "✅ Zahlung eingegangen! Ihr FortalOps-Abonnement wird aktiviert.",
+    pay_fail_msg: "⚠️ Zahlung abgebrochen oder unvollständig."
+  },
+  fr: {
+    nav_hub: "Hub Fortaleza", nav_products: "VPN Sécurisé & Performance", nav_pricing: "Tarifs", nav_contract: "Contrat & No-Logs",
+    btn_login: "Connexion", btn_signup: "Créer un compte", nav_account: "Mon Compte", btn_logout: "Déconnexion",
+    dash_subs_title: "Mes Abonnements & Accès VPN (Data Center Tier III • Fortaleza)",
+    dash_invoices_title: "🧾 Historique des Factures et Paiements",
+    no_invoices: "Aucune facture confirmée pour le moment.",
+    inv_date: "Date", inv_provider: "Moyen", inv_amount: "Montant", inv_status: "Statut",
+    sub_renews: "Valide jusqu'au / Renouvellement :",
+    btn_cancel_sub: "Résilier l'abonnement",
+    btn_refund_7d: "Demander un remboursement (Garantie 7 jours)",
+    sub_canceled_lbl: "Résilié",
+    confirm_cancel: "Voulez-vous vraiment résilier cet abonnement ?",
+    confirm_refund: "Demander la résiliation avec remboursement intégral (garantie de 7 jours) ?",
+    cancel_success: "Demande enregistrée avec succès !",
+    pill_1: "🇧🇷 VPN Brésilien à Fortaleza-CE", pill_2: "🏢 Data Center Tier III Certifié", pill_3: "🌊 Hub de Câbles Sous-Marins Internationaux", pill_4: "🔒 Politique Stricte Zéro-Logs",
+    hero_title: "VPN Brésilien au <span>Cœur des Câbles Sous-Marins</span> de Fortaleza",
+    hero_sub: "Hébergé dans un <strong>Data Center Tier III</strong> à Fortaleza — le plus grand carrefour de câbles sous-marins d'Amérique latine. Choisissez entre <strong>VPN Sécurisé</strong> (confidentialité maximale et IP brésilienne) ou <strong>VPN Performance</strong> (routage direct sans détour par São Paulo). Zéro journal de trafic.",
+    hero_cta_1: "S'abonner à FortalOps VPN", hero_cta_2: "Découvrir VPN Sécurisé & Performance",
+    map_title: "Backbone Sous-Marin Global FortalOps • Fortaleza-CE (Tier III)",
+    map_leg_direct: "Route Sous-Marine Directe (FortalOps)",
+    map_leg_hub: "Hub Tier III (Fortaleza-CE)",
+    map_leg_detour: "Détour Opérateur Classique (+60ms via SP)",
+    trust_1: "Data Center haute sécurité à Fortaleza, Brésil", trust_2_val: "+16 Câbles", trust_2: "Liaison directe avec les USA, l'Europe et l'Afrique",
+    trust_3: "Aucun journal de trafic ni d'historique", trust_4: "Paiement sécurisé PCI-DSS (PayPal & Carte)",
+    hub_tag: "Avantage Géographique & Ingénierie Réseau", hub_title: "Pourquoi Fortaleza est-il le centre stratégique d'Internet au Brésil ?",
+    hub_p1: "Fortaleza est le point d'atterrissage de plus d'une douzaine de câbles sous-marins intercontinentaux reliant l'Amérique du Sud à l'Amérique du Nord, l'Europe et l'Afrique — évitant jusqu'à <strong>+60 ms de latence inutile</strong>.",
+    hub_p2: "Avec les serveurs <strong>FortalOps hébergés dans un Data Center Tier III à Fortaleza</strong>, votre connexion emprunte le chemin le plus court du continent avec redondance électrique et sécurité physique 24h/24.",
+    hub_box_title: "🛡️ Sécurité de l'Infrastructure & des Paiements",
+    hub_li_1: "<strong>Data Center Tier III (Fortaleza) :</strong> Disponibilité garantie de 99,982 %, contrôle biométrique et alimentation redondante N+1.",
+    hub_li_2: "<strong>Politique Stricte No-Logs :</strong> Nos nœuds WireGuard® fonctionnent en RAM sans enregistrer les sites visités, DNS ou adresses IP.",
+    hub_li_3: "<strong>Paiement Blindé PCI-DSS :</strong> Transactions traitées par PayPal et Mercado Pago. FortalOps ne stocke jamais vos données bancaires.",
+    prod_sec_title: "Deux Produits Spécialisés. Une Base Tier III à Fortaleza.",
+    prod_sec_sub: "Choisissez la solution adaptée à votre usage — toutes deux dotées du chiffrement WireGuard® et d'une garantie zéro-logs.",
+    prod1_tag: "Produit 01 • Confidentialité & Mobilité", prod1_title: "🛡️ VPN Sécurisé",
+    prod1_desc: "Idéal pour sécuriser les réseaux Wi-Fi publics, le télétravail et les expatriés ou voyageurs ayant besoin d'une <strong>authentique IP brésilienne</strong>.",
+    prod1_li1: "<strong>Véritable IP Brésilienne (Fortaleza-CE) :</strong> Accédez aux banques brésiliennes, Gov.br et plateformes locales sans blocage.",
+    prod1_li2: "<strong>Chiffrement ChaCha20-Poly1305 :</strong> Tunnel blindé contre les interceptions dans les aéroports et hôtels.",
+    prod1_li3: "<strong>Zéro Journal de Trafic (No-Logs) :</strong> Confidentialité garantie techniquement et contractuellement.",
+    prod1_li4: "<strong>Kill Switch & Protection contre les fuites DNS.</strong>",
+    prod2_tag: "Produit 02 • Faible Latence & Câbles Sous-Marins", prod2_title: "⚡ VPN Performance",
+    prod2_desc: "Conçu pour les joueurs compétitifs et traders exigeant un <strong>routage direct via les câbles sous-marins internationaux</strong>.",
+    prod2_li1: "<strong>Routage Sous-Marin Direct :</strong> Élimine le détour par São Paulo vers Miami, New York et l'Europe.",
+    prod2_li2: "<strong>Anti-Jitter & Zéro Perte de Paquets :</strong> Priorisation UDP pour des sessions en ligne ultra-fluides.",
+    prod2_li3: "<strong>Data Center Tier III à Fortaleza :</strong> Backbone haute capacité connecté aux grands câbles mondiaux.",
+    prod2_li4: "<strong>Split Tunneling Intelligent :</strong> Faites passer uniquement votre jeu ou application dans le tunnel VPN.",
+    nologs_title: "🔒 Engagement Public Zéro-Logs (No-Logs)",
+    nologs_desc: "FortalOps <strong>ne collecte, ne stocke et ne surveille pas</strong> votre historique de navigation, trafic de données, requêtes DNS ou adresses IP d'origine.",
+    nologs_btn: "📄 Lire le Contrat Standard & la Clause No-Logs",
+    price_title: "Offres FortalOps (VPN Sécurisé & VPN Performance)",
+    price_sub: "Paiement sécurisé via PayPal (USD International) ou Mercado Pago (BRL). Garantie satisfait ou remboursé de 7 jours.",
+    cycle_monthly: "Mensuel", cycle_annual: "Annuel (-35%)", cycle_biennial: "2 Ans (-50%)",
+    per_month: "/mois", popular_badge: "Le Plus Choisi", devices_lbl: "appareils",
+    btn_mp: "Mercado Pago (BRL)", btn_paypal: "PayPal (USD / International)",
+    dl_title: "Téléchargez le client officiel WireGuard®", dl_sub: "Connectez-vous au Data Center Tier III de Fortaleza en quelques secondes via QR Code.", dl_win: "Télécharger (.exe)",
+    footer_infra: "Infrastructure Tier III • Fortaleza, Ceará, Brésil.", footer_terms: "Contrat Standard", footer_nologs: "Politique No-Logs",
+    auth_sub: "Accès immédiat au portail et à l'infrastructure Tier III de Fortaleza.", auth_name: "Nom Complet", auth_email: "E-mail", auth_pass: "Mot de passe (min. 6 caractères)",
+    auth_terms: "J'accepte le <a href='#' data-open-contract style='color: var(--primary);'>Contrat Standard</a> et la <strong>Politique Zéro-Logs</strong>.",
+    auth_btn: "Continuer", modal_login: "Connexion à FortalOps", modal_signup: "Créer un compte FortalOps",
+    pay_success_msg: "✅ Paiement reçu ! Votre abonnement FortalOps est en cours d'activation.",
+    pay_fail_msg: "⚠️ Paiement annulé ou incomplet."
+  }
+};
+
+export class Translator {
+  constructor() {
+    const supported = ['pt', 'en', 'it', 'de', 'fr'];
+    const browserLang = (navigator.language || 'en').slice(0, 2).toLowerCase();
+    this.lang = supported.includes(browserLang) ? browserLang : 'en';
+  }
+
+  setLanguage(lang) {
+    if (DICTIONARIES[lang]) {
+      this.lang = lang;
+      this.applyToDOM();
+    }
+  }
+
+  t(key) {
+    return DICTIONARIES[this.lang]?.[key] || DICTIONARIES.pt[key] || key;
+  }
+
+  applyToDOM() {
+    document.documentElement.lang = this.lang;
+    document.querySelectorAll('[data-i18n]').forEach((el) => {
+      const key = el.getAttribute('data-i18n');
+      const val = this.t(key);
+      if (val) el.innerText = val;
+    });
+    document.querySelectorAll('[data-i18n-html]').forEach((el) => {
+      const key = el.getAttribute('data-i18n-html');
+      const val = this.t(key);
+      if (val) el.innerHTML = val;
+    });
+  }
+}
