@@ -47,7 +47,7 @@ export class FortalOpsAPI {
   async fetchUserSubscriptions(userId) {
     const { data } = await this.sb
       .from('subscriptions')
-      .select('*, plans(names, price_brl_monthly, price_usd_monthly, max_devices)')
+      .select('*, plans(id, slug, names, price_brl_monthly, price_usd_monthly, discount_annual_pct, discount_biennial_pct, max_devices)')
       .eq('user_id', userId)
       .order('created_at', { ascending: false });
     return data || [];
@@ -74,10 +74,15 @@ export class FortalOpsAPI {
     if (error) throw error;
   }
 
-  async createCheckoutSession({ planId, billingCycle, provider }) {
+  async createCheckoutSession({ planId, billingCycle, provider, upgradeSubscriptionId = null, prorataAmount = null }) {
     const fnName = provider === 'paypal' ? 'create-paypal-checkout' : 'create-mp-checkout';
     const { data, error } = await this.sb.functions.invoke(fnName, {
-      body: { plan_id: planId, billing_cycle: billingCycle }
+      body: {
+        plan_id: planId,
+        billing_cycle: billingCycle,
+        upgrade_subscription_id: upgradeSubscriptionId,
+        prorata_amount: prorataAmount
+      }
     });
     if (error || !data?.checkout_url) {
       throw new Error(error?.message || data?.error || 'Erro ao iniciar checkout.');
