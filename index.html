@@ -417,4 +417,53 @@
           <input type="password" id="userPass" required minlength="6" placeholder="••••••••" />
         </div>
         <div class="form-group" id="termsGroup" style="display: flex; align-items: flex-start; gap: 8px; margin-top: 10px;">
-          <input type="checkbox" id="acceptContract" required style="width: auto; margin-top: 4px;"
+          <input type="checkbox" id="acceptContract" required style="width: auto; margin-top: 4px;" />
+          <label for="acceptContract" style="font-size: 0.82rem; line-height: 1.4;" data-i18n-html="auth_terms">
+            Li e aceito o <a href="#" data-open-contract style="color: var(--primary);">Contrato Padrão de Prestação de Serviços</a> e a <strong>Política Estrita Zero-Logs (No-Logs)</strong> da FortalOps.
+          </label>
+        </div>
+        <button type="submit" class="btn" style="width: 100%; margin-top: 8px;" id="modalSubmitBtn" data-i18n="auth_btn">Continuar</button>
+      </form>
+      <p id="authFeedback" style="margin-top: 12px; font-size: 0.86rem; color: var(--accent); text-align: center;"></p>
+    </div>
+  </div>
+
+  <!-- Modal Contrato Padrão & Política No-Logs -->
+  <div class="modal-backdrop" id="contractModal">
+    <div class="modal modal-lg">
+      <button class="close-modal" data-close-contract>&times;</button>
+      <h3 style="margin-bottom: 6px;">Contrato Padrão de Prestação de Serviços VPN & Política No-Logs</h3>
+      <p style="color: var(--muted); font-size: 0.84rem; margin-bottom: 16px;">Versão 1.0 • Aplicável a todos os assinantes FortalOps (VPN Segura e VPN Desempenho)</p>
+      <div class="contract-text">
+        <h4>1. OBJETO DO SERVIÇO</h4>
+        <p>O presente Contrato regula o licenciamento e a disponibilização de infraestrutura de Rede Privada Virtual (VPN) criptografada nas modalidades <strong>VPN Segura</strong> e <strong>VPN Desempenho</strong>, operadas pela <strong>FortalOps</strong> em servidores hospedados em <strong>Data Center Tier III localizado em Fortaleza-CE, Brasil</strong>, conectado ao entroncamento internacional de cabos submarinos.</p>
+
+        <h4>2. ELEGIBILIDADE E CADASTRO</h4>
+        <p>O serviço destina-se exclusivamente a pessoas físicas maiores de 18 (dezoito) anos ou pessoas jurídicas devidamente constituídas. Ao criar uma conta, o Assinante declara fornecer informações cadastrais verídicas e compromete-se a manter suas credenciais e chaves criptográficas WireGuard® sob sigilo.</p>
+
+        <h4>3. USO ACEITÁVEL E PROIBIÇÕES</h4>
+        <p>O Assinante compromete-se a utilizar a FortalOps apenas para fins lícitos. É expressamente proibido utilizar a rede para: (a) ataques cibernéticos, DDoS, varredura de portas ou distribuição de malware; (b) envio de spam em massa ou fraude financeira; (c) violação de direitos autorais ou qualquer atividade ilícita prevista na legislação brasileira e internacional. O descumprimento acarretará a suspensão imediata da conta sem direito a reembolso.</p>
+
+        <h4>4. POLÍTICA ESTRITA DE NÃO REGISTRO DE TRÁFEGO (ZERO-LOGS / NO-LOGS)</h4>
+        <p>A privacidade do Assinante é o pilar central da FortalOps. Sob nossa rigorosa política <strong>No-Logs</strong>:</p>
+        <p>• <strong>Não registramos nem armazenamos:</strong> histórico de sites visitados, conteúdo de tráfego, consultas DNS, endereços IP de origem da conexão, carimbos de data/hora de sessão VPN ou largura de banda individualizada por destino.</p>
+        <p>• <strong>Dados mínimos de operação:</strong> Mantemos apenas os dados estritamente necessários para gestão da conta e cobrança (e-mail, plano contratado, status financeiro e contagem simultânea de chaves WireGuard® ativas para cumprimento do limite do plano), em conformidade com a Lei Geral de Proteção de Dados (LGPD — Lei nº 13.709/2018).</p>
+
+        <h4>5. INFRAESTRUTURA TIER III E DISPONIBILIDADE</h4>
+        <p>Os servidores VPN operam em Data Center padrão Tier III em Fortaleza-CE com redundância de energia e conectividade. Eventuais janelas de manutenção preventiva serão comunicadas previamente no painel do assinante. A velocidade final percebida depende também da qualidade da conexão local do provedor de internet (ISP) do Assinante.</p>
+
+        <h4>6. PAGAMENTOS, SEGURANÇA PCI-DSS E DIREITO DE ARREPENDIMENTO</h4>
+        <p>Os pagamentos são processados por intermediadores certificados <strong>PCI-DSS</strong> (Mercado Pago e PayPal), não havendo armazenamento de números completos de cartão de crédito nos servidores da FortalOps. Nos termos do Art. 49 do Código de Defesa do Consumidor, o Assinante possui o prazo de <strong>7 (sete) dias corridos</strong> após a primeira contratação para solicitar o cancelamento e reembolso integral.</p>
+
+        <h4>7. FORO</h4>
+        <p>Fica eleito o Foro da Comarca de Fortaleza, Estado do Ceará, Brasil, para dirimir quaisquer questões oriundas deste Contrato.</p>
+      </div>
+      <div style="margin-top: 18px; text-align: right;">
+        <button class="btn" data-close-contract>Entendi e Fechar</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="./js/app.js"></script>
+</body>
+</html>
