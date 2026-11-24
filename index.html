@@ -494,19 +494,18 @@
       await createSubscriptionRecord(planId);
     }
 
-    async function createSubscriptionRecord(planId) {
-      const currency = currentLang === 'pt' ? 'BRL' : 'USD';
-      const { error } = await sb.from('subscriptions').insert({
-        user_id: currentUser.id,
-        plan_id: planId,
-        billing_cycle: currentCycle,
-        currency: currency,
-        status: 'pending_payment'
+   async function createSubscriptionRecord(planId) {
+      const { data, error } = await sb.functions.invoke('create-mp-checkout', {
+        body: { plan_id: planId, billing_cycle: currentCycle }
       });
-      if (error) { alert('Erro ao registrar assinatura: ' + error.message); return; }
+
+      if (error || !data?.checkout_url) {
+        alert('Erro ao iniciar checkout: ' + (error?.message || data?.error || 'Tente novamente.'));
+        return;
+      }
+
       pendingPlanId = null;
-      await loadUserDashboard();
-      document.getElementById('dashboardSection').scrollIntoView({ behavior: 'smooth' });
+      window.location.href = data.checkout_url;
     }
 
     function openAuth(mode) {
