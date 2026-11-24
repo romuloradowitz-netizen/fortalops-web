@@ -115,8 +115,6 @@ select.lang-select {
 .btn-ghost { background: transparent; color: var(--text); border: 1px solid var(--border); }
 .btn-ghost:hover { border-color: var(--primary); background: rgba(6, 182, 212, 0.08); }
 .btn-accent { background: var(--accent); color: #022c22; }
-.btn-whatsapp { background: #25D366; color: #022c22; }
-.btn-discord { background: #5865F2; color: #ffffff; }
 .btn-sm { padding: 6px 12px; font-size: 0.82rem; }
 .btn-lg { padding: 14px 28px; font-size: 1.05rem; }
 
@@ -313,25 +311,6 @@ section { padding: 68px 0; }
   gap: 20px;
 }
 
-/* Support & Community Box */
-.support-banner {
-  background: linear-gradient(135deg, rgba(37, 211, 102, 0.08), rgba(88, 101, 242, 0.12));
-  border: 1px solid rgba(88, 101, 242, 0.35);
-  border-radius: 18px;
-  padding: 32px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 24px;
-}
-
-.support-actions {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
 /* Pricing */
 .billing-toggle {
   display: flex;
@@ -434,30 +413,6 @@ th { color: var(--muted); font-weight: 600; }
 .st-pending { background: rgba(245, 158, 11, 0.15); color: var(--warn); }
 .st-active { background: rgba(16, 185, 129, 0.15); color: var(--accent); }
 
-/* Upgrade Summary Card inside Modal */
-.upgrade-summary-box {
-  background: var(--bg);
-  border: 1px solid rgba(6, 182, 212, 0.35);
-  border-radius: 12px;
-  padding: 16px;
-  margin-bottom: 18px;
-  font-size: 0.9rem;
-}
-
-.upgrade-row {
-  display: flex;
-  justify-content: space-between;
-  padding: 6px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.upgrade-row:last-child {
-  border-bottom: none;
-  padding-top: 10px;
-  font-size: 1.08rem;
-  color: var(--accent);
-}
-
 /* Modals */
 .modal-backdrop {
   display: none;
@@ -514,63 +469,95 @@ th { color: var(--muted); font-weight: 600; }
 
 .contract-text h4 { color: var(--text); margin: 16px 0 6px; }
 
-/* Footer & Social Icons */
-footer { border-top: 1px solid var(--border); padding: 48px 0; color: var(--muted); font-size: 0.88rem; }
-footer a { color: var(--primary); text-decoration: none; cursor: pointer; }
+/* Upgrade summary box */
+.upgrade-box {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 18px;
+  font-size: 0.9rem;
+}
 
+.upgrade-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.upgrade-row:last-child {
+  border-bottom: none;
+  padding-top: 10px;
+  font-size: 1.05rem;
+}
+
+/* Social Links Footer */
 .social-links {
   display: flex;
   align-items: center;
   gap: 12px;
-  flex-wrap: wrap;
 }
 
-.social-btn {
+.social-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: var(--surface);
+  border: 1px solid var(--border);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 38px;
-  height: 38px;
-  border-radius: 10px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  color: var(--text);
+  color: var(--muted);
   transition: 0.2s;
 }
 
-.social-btn:hover {
-  border-color: var(--primary);
+.social-icon:hover {
   color: var(--primary);
+  border-color: var(--primary);
   transform: translateY(-2px);
 }
 
-/* Floating WhatsApp Button */
-.whatsapp-float {
+/* Floating 24/7 Support Dock (WhatsApp & Discord) */
+.support-dock {
   position: fixed;
-  bottom: 24px;
-  right: 24px;
+  right: 22px;
+  bottom: 22px;
   z-index: 150;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-end;
+}
+
+.support-pill {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  background: #25D366;
-  color: #022c22;
-  font-weight: 800;
-  font-size: 0.9rem;
-  padding: 12px 18px;
+  padding: 10px 16px;
   border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 700;
   text-decoration: none;
-  box-shadow: 0 10px 28px rgba(37, 211, 102, 0.35);
+  color: #ffffff;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
   transition: 0.2s;
 }
 
-.whatsapp-float:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 14px 34px rgba(37, 211, 102, 0.5);
+.support-pill:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.08);
 }
 
-@media (max-width: 860px) {
-  .nav-links { display: none; }
-  .whatsapp-float span { display: none; }
-  .whatsapp-float { padding: 14px; }
+.support-pill.whatsapp {
+  background: linear-gradient(135deg, #25d366, #128c7e);
 }
+
+.support-pill.discord {
+  background: linear-gradient(135deg, #5865f2, #4752c4);
+}
+
+footer { border-top: 1px solid var(--border); padding: 44px 0 90px; color: var(--muted); font-size: 0.88rem; }
+footer a { color: var(--primary); text-decoration: none; cursor: pointer; }
+
+@media (max-width: 860px) { .nav-links { display: none; } }
