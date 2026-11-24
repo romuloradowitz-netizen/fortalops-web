@@ -32,17 +32,17 @@ class FortalOpsApp {
   }
 
   bindEvents() {
-    // Seletor de idiomas
     document.getElementById('langSelector').addEventListener('change', async (e) => {
       this.translator.setLanguage(e.target.value);
       this.ui.renderPlans(this.cachedPlans, this.currentCycle);
       if (this.currentUser) {
         const subs = await this.api.fetchUserSubscriptions(this.currentUser.id);
         this.ui.renderUserSubscriptions(subs);
+        const payments = await this.api.fetchUserPayments(this.currentUser.id);
+        this.ui.renderUserPayments(payments);
       }
     });
 
-    // Ciclos de cobrança
     document.querySelectorAll('.toggle-btn').forEach((btn) => {
       btn.addEventListener('click', () => {
         this.currentCycle = btn.dataset.cycle;
@@ -52,11 +52,26 @@ class FortalOpsApp {
       });
     });
 
-    // Delegação global de cliques
     document.addEventListener('click', async (e) => {
       const subBtn = e.target.closest('[data-subscribe-plan]');
       if (subBtn) {
         await this.startCheckout(subBtn.dataset.subscribePlan, subBtn.dataset.provider);
+        return;
+      }
+
+      const cancelSubBtn = e.target.closest('[data-cancel-sub]');
+      if (cancelSubBtn) {
+        const isRefund = cancelSubBtn.dataset.refund7d === 'true';
+        const msg = this.translator.t(isRefund ? 'confirm_refund' : 'confirm_cancel');
+        if (confirm(msg)) {
+          try {
+            await this.api.cancelSubscription(cancelSubBtn.dataset.cancelSub, isRefund);
+            alert(this.translator.t('cancel_success'));
+            await this.refreshSession();
+          } catch (err) {
+            alert('Erro: ' + err.message);
+          }
+        }
         return;
       }
 
@@ -116,10 +131,7 @@ class FortalOpsApp {
       }
     });
 
-    // Formulário de Login / Cadastro
     document.getElementById('authForm').addEventListener('submit', (e) => this.handleAuthSubmit(e));
-
-    // Formulário Admin de Novo Plano
     document.getElementById('newPlanForm').addEventListener('submit', (e) => this.handleCreatePlan(e));
   }
 
@@ -239,6 +251,9 @@ class FortalOpsApp {
 
     const userSubs = await this.api.fetchUserSubscriptions(this.currentUser.id);
     this.ui.renderUserSubscriptions(userSubs);
+
+    const userPayments = await this.api.fetchUserPayments(this.currentUser.id);
+    this.ui.renderUserPayments(userPayments);
   }
 
   async handleCreatePlan(e) {
@@ -279,8 +294,7 @@ class FortalOpsApp {
       alert(this.translator.t('pay_success_msg'));
       window.history.replaceState({}, document.title, window.location.pathname);
       if (this.currentUser) {
-        const subs = await this.api.fetchUserSubscriptions(this.currentUser.id);
-        this.ui.renderUserSubscriptions(subs);
+        await this.refreshSession();
       }
     } else if (payStatus === 'failure') {
       alert(this.translator.t('pay_fail_msg'));
