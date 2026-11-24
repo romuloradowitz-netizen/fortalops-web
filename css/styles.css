@@ -115,6 +115,8 @@ select.lang-select {
 .btn-ghost { background: transparent; color: var(--text); border: 1px solid var(--border); }
 .btn-ghost:hover { border-color: var(--primary); background: rgba(6, 182, 212, 0.08); }
 .btn-accent { background: var(--accent); color: #022c22; }
+.btn-whatsapp { background: #25D366; color: #022c22; }
+.btn-discord { background: #5865F2; color: #ffffff; }
 .btn-sm { padding: 6px 12px; font-size: 0.82rem; }
 .btn-lg { padding: 14px 28px; font-size: 1.05rem; }
 
@@ -177,6 +179,53 @@ h1 span { color: var(--primary); }
   flex-wrap: wrap;
 }
 
+/* Mapa Submarino Interativo */
+.subsea-map-wrapper {
+  margin-top: 48px;
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.85), rgba(6, 10, 18, 0.95));
+  border: 1px solid rgba(6, 182, 212, 0.3);
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  position: relative;
+  overflow: hidden;
+}
+
+.subsea-map-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 0 8px 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  margin-bottom: 12px;
+  font-size: 0.82rem;
+}
+
+.map-legend {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  color: var(--muted);
+}
+
+.legend-item { display: inline-flex; align-items: center; gap: 6px; }
+.dot-cyan { width: 10px; height: 10px; border-radius: 50%; background: #06b6d4; box-shadow: 0 0 8px #06b6d4; }
+.dot-green { width: 10px; height: 10px; border-radius: 50%; background: #10b981; box-shadow: 0 0 8px #10b981; }
+.dot-red { width: 14px; height: 2px; border-top: 2px dashed #ef4444; }
+
+.subsea-svg { width: 100%; height: auto; max-height: 430px; display: block; }
+.cable-flow { stroke-dasharray: 10 8; animation: flowPacket 1.8s linear infinite; }
+.cable-flow-fast { stroke-dasharray: 14 10; animation: flowPacket 1.2s linear infinite; }
+.pulse-ring { transform-origin: 365px 255px; animation: radarPulse 2.4s ease-out infinite; }
+
+@keyframes flowPacket { to { stroke-dashoffset: -36; } }
+@keyframes radarPulse {
+  0% { transform: scale(0.8); opacity: 0.9; }
+  100% { transform: scale(2.6); opacity: 0; }
+}
+
 /* Trust Strip */
 .trust-grid {
   display: grid;
@@ -193,13 +242,7 @@ h1 span { color: var(--primary); }
   text-align: center;
 }
 
-.trust-item strong {
-  display: block;
-  font-size: 1.55rem;
-  color: var(--primary);
-  margin-bottom: 4px;
-}
-
+.trust-item strong { display: block; font-size: 1.55rem; color: var(--primary); margin-bottom: 4px; }
 .trust-item span { font-size: 0.85rem; color: var(--muted); }
 
 section { padding: 68px 0; }
@@ -268,6 +311,25 @@ section { padding: 68px 0; }
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 20px;
+}
+
+/* Support & Community Box */
+.support-banner {
+  background: linear-gradient(135deg, rgba(37, 211, 102, 0.08), rgba(88, 101, 242, 0.12));
+  border: 1px solid rgba(88, 101, 242, 0.35);
+  border-radius: 18px;
+  padding: 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.support-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
 /* Pricing */
@@ -372,6 +434,30 @@ th { color: var(--muted); font-weight: 600; }
 .st-pending { background: rgba(245, 158, 11, 0.15); color: var(--warn); }
 .st-active { background: rgba(16, 185, 129, 0.15); color: var(--accent); }
 
+/* Upgrade Summary Card inside Modal */
+.upgrade-summary-box {
+  background: var(--bg);
+  border: 1px solid rgba(6, 182, 212, 0.35);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 18px;
+  font-size: 0.9rem;
+}
+
+.upgrade-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.upgrade-row:last-child {
+  border-bottom: none;
+  padding-top: 10px;
+  font-size: 1.08rem;
+  color: var(--accent);
+}
+
 /* Modals */
 .modal-backdrop {
   display: none;
@@ -428,79 +514,63 @@ th { color: var(--muted); font-weight: 600; }
 
 .contract-text h4 { color: var(--text); margin: 16px 0 6px; }
 
-footer { border-top: 1px solid var(--border); padding: 44px 0; color: var(--muted); font-size: 0.88rem; }
+/* Footer & Social Icons */
+footer { border-top: 1px solid var(--border); padding: 48px 0; color: var(--muted); font-size: 0.88rem; }
 footer a { color: var(--primary); text-decoration: none; cursor: pointer; }
 
-@media (max-width: 860px) { .nav-links { display: none; } }
-
-/* Mapa Submarino Interativo (Marketing Hero Visual) */
-.subsea-map-wrapper {
-  margin-top: 48px;
-  background: linear-gradient(180deg, rgba(15, 23, 42, 0.85), rgba(6, 10, 18, 0.95));
-  border: 1px solid rgba(6, 182, 212, 0.3);
-  border-radius: 20px;
-  padding: 20px;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.06);
-  position: relative;
-  overflow: hidden;
-}
-
-.subsea-map-header {
+.social-links {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
   gap: 12px;
-  padding: 0 8px 14px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-  margin-bottom: 12px;
-  font-size: 0.82rem;
-}
-
-.map-legend {
-  display: flex;
-  gap: 16px;
   flex-wrap: wrap;
-  color: var(--muted);
 }
 
-.legend-item {
+.social-btn {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  transition: 0.2s;
 }
 
-.dot-cyan { width: 10px; height: 10px; border-radius: 50%; background: #06b6d4; box-shadow: 0 0 8px #06b6d4; }
-.dot-green { width: 10px; height: 10px; border-radius: 50%; background: #10b981; box-shadow: 0 0 8px #10b981; }
-.dot-red { width: 14px; height: 2px; border-top: 2px dashed #ef4444; }
-
-.subsea-svg {
-  width: 100%;
-  height: auto;
-  max-height: 430px;
-  display: block;
+.social-btn:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  transform: translateY(-2px);
 }
 
-.cable-flow {
-  stroke-dasharray: 10 8;
-  animation: flowPacket 1.8s linear infinite;
+/* Floating WhatsApp Button */
+.whatsapp-float {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 150;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #25D366;
+  color: #022c22;
+  font-weight: 800;
+  font-size: 0.9rem;
+  padding: 12px 18px;
+  border-radius: 999px;
+  text-decoration: none;
+  box-shadow: 0 10px 28px rgba(37, 211, 102, 0.35);
+  transition: 0.2s;
 }
 
-.cable-flow-fast {
-  stroke-dasharray: 14 10;
-  animation: flowPacket 1.2s linear infinite;
+.whatsapp-float:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 34px rgba(37, 211, 102, 0.5);
 }
 
-.pulse-ring {
-  transform-origin: 365px 255px;
-  animation: radarPulse 2.4s ease-out infinite;
-}
-
-@keyframes flowPacket {
-  to { stroke-dashoffset: -36; }
-}
-
-@keyframes radarPulse {
-  0% { transform: scale(0.8); opacity: 0.9; }
-  100% { transform: scale(2.6); opacity: 0; }
+@media (max-width: 860px) {
+  .nav-links { display: none; }
+  .whatsapp-float span { display: none; }
+  .whatsapp-float { padding: 14px; }
 }
