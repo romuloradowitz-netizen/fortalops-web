@@ -5,6 +5,8 @@ import { DashboardUI } from './ui.js';
 const SUPABASE_URL = 'https://jbyyzztewzrurqreouqs.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_4gsx3jcA6WqTPJPsRUuQsg_mgrAuINP';
 const PIX_KEY_DISPLAY = '02874149900';
+const WG_SERVER_PUBLIC_KEY = '6ddQiL+B2KKGyyvagP0Hl0p+cxg4kBYWJ36QVQeRK0o=';
+const WG_SERVER_ENDPOINT = '201.23.90.205:51820';
 
 class FortalOpsApp {
   constructor() {
@@ -19,6 +21,10 @@ class FortalOpsApp {
     this.currentProfile = null;
     this.authMode = 'signup';
     this.pendingCheckout = null;
+  }
+
+  getSupabaseClient() {
+    return this.api.supabase || this.api.client || window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
   }
 
   async init() {
@@ -41,6 +47,7 @@ class FortalOpsApp {
         this.ui.renderUserSubscriptions(this.cachedUserSubs);
         const payments = await this.api.fetchUserPayments(this.currentUser.id);
         this.ui.renderUserPayments(payments);
+        await this.loadUserPeers();
       }
     });
 
@@ -148,6 +155,17 @@ class FortalOpsApp {
         return;
       }
 
+      if (e.target.id === 'btnProvisionVpn') {
+        await this.handleProvisionVpn();
+        return;
+      }
+
+      const revokePeerBtn = e.target.closest('[data-revoke-peer]');
+      if (revokePeerBtn) {
+        await this.handleRevokePeer(revokePeerBtn.dataset.revokePeer);
+        return;
+      }
+
       const copyPixBtn = e.target.closest('[data-copy-pix]');
       if (copyPixBtn) {
         await navigator.clipboard.writeText(copyPixBtn.dataset.copyPix);
@@ -181,167 +199,4 @@ class FortalOpsApp {
       if (this.currentProfile?.role === 'admin') {
         this.ui.renderAdminPlans(this.cachedPlans);
       }
-    } catch (err) {
-      document.getElementById('dynamicPlansGrid').innerHTML =
-        `<p style="color:var(--danger);text-align:center;grid-column:1/-1;">Erro: ${err.message}</p>`;
     }
-  }
-
-  async startCheckout(planId, provider) {
-    if (!this.currentUser) {
-      this.pendingCheckout = { planId, provider };
-      this.authMode = 'signup';
-      this.ui.openAuthModal('signup');
-      return;
-    }
-
-    try {
-      const checkoutUrl = await this.api.createCheckoutSession({
-        planId,
-        billingCycle: this.currentCycle,
-        provider
-      });
-      this.pendingCheckout = null;
-      window.location.href = checkoutUrl;
-    } catch (err) {
-      alert(err.message);
-    }
-  }
-
-  async handleAuthSubmit(e) {
-    e.preventDefault();
-    const email = document.getElementById('userEmail').value.trim();
-    const password = document.getElementById('userPass').value;
-    const fullName = document.getElementById('userName').value.trim();
-    const fb = document.getElementById('authFeedback');
-
-    fb.style.color = 'var(--primary)';
-    fb.innerText = '...';
-
-    if (this.authMode === 'signup') {
-      const { error } = await this.api.signUp({
-        email,
-        password,
-        fullName,
-        preferredLang: this.translator.lang
-      });
-      if (error) {
-        fb.style.color = 'var(--danger)';
-        fb.innerText = error.message;
-        return;
-      }
-      fb.style.color = 'var(--accent)';
-      fb.innerText = '✓ OK!';
-      setTimeout(async () => {
-        this.ui.closeAuthModal();
-        await this.refreshSession();
-        if (this.pendingCheckout) {
-          await this.startCheckout(this.pendingCheckout.planId, this.pendingCheckout.provider);
-        }
-      }, 800);
-    } else {
-      const { error } = await this.api.signIn({ email, password });
-      if (error) {
-        fb.style.color = 'var(--danger)';
-        fb.innerText = error.message;
-        return;
-      }
-      this.ui.closeAuthModal();
-      await this.refreshSession();
-    }
-  }
-
-  async logout() {
-    await this.api.signOut();
-    this.currentUser = null;
-    this.currentProfile = null;
-    this.cachedUserSubs = [];
-    document.getElementById('guestActions').style.display = 'flex';
-    document.getElementById('userActions').style.display = 'none';
-    document.getElementById('dashboardSection').style.display = 'none';
-  }
-
-  async refreshSession() {
-    const session = await this.api.getSession();
-    if (!session) return;
-
-    this.currentUser = session.user;
-    this.currentProfile = await this.api.getProfile(this.currentUser.id);
-
-    document.getElementById('guestActions').style.display = 'none';
-    document.getElementById('userActions').style.display = 'flex';
-    document.getElementById('dashboardSection').style.display = 'block';
-
-    document.getElementById('dashWelcome').innerText = this.currentProfile?.full_name || this.currentUser.email;
-    document.getElementById('dashEmail').innerText = this.currentUser.email;
-
-    const badge = document.getElementById('dashRoleBadge');
-    if (this.currentProfile?.role === 'admin') {
-      badge.innerText = 'ADMIN';
-      badge.classList.add('admin');
-      document.getElementById('adminPanel').style.display = 'block';
-      this.ui.renderAdminPlans(this.cachedPlans);
-      const allSubs = await this.api.fetchAllSubscriptions();
-      this.ui.renderAdminSubscriptions(allSubs);
-    } else {
-      badge.innerText = 'VIP';
-      badge.classList.remove('admin');
-      document.getElementById('adminPanel').style.display = 'none';
-    }
-
-    this.cachedUserSubs = await this.api.fetchUserSubscriptions(this.currentUser.id);
-    this.ui.renderUserSubscriptions(this.cachedUserSubs);
-
-    const userPayments = await this.api.fetchUserPayments(this.currentUser.id);
-    this.ui.renderUserPayments(userPayments);
-  }
-
-  async handleCreatePlan(e) {
-    e.preventDefault();
-    const slug = document.getElementById('pSlug').value.trim();
-    const namePt = document.getElementById('pNamePt').value.trim();
-    const nameEn = document.getElementById('pNameEn').value.trim();
-    const priceBrl = parseFloat(document.getElementById('pPriceBrl').value);
-    const priceUsd = parseFloat(document.getElementById('pPriceUsd').value);
-    const maxDevices = parseInt(document.getElementById('pDevices').value, 10);
-    const featPt = document.getElementById('pFeatPt').value.split('\n').map((s) => s.trim()).filter(Boolean);
-    const featEn = document.getElementById('pFeatEn').value.split('\n').map((s) => s.trim()).filter(Boolean);
-
-    try {
-      await this.api.createPlan({
-        slug,
-        names: { pt: namePt, en: nameEn, it: nameEn, de: nameEn, fr: nameEn },
-        features: { pt: featPt, en: featEn, it: featEn, de: featEn, fr: featEn },
-        price_brl_monthly: priceBrl,
-        price_usd_monthly: priceUsd,
-        max_devices: maxDevices,
-        sort_order: this.cachedPlans.length + 1
-      });
-      e.target.reset();
-      document.getElementById('newPlanForm').style.display = 'none';
-      await this.loadPlans();
-    } catch (err) {
-      alert('Erro ao salvar plano: ' + err.message);
-    }
-  }
-
-  async handlePaymentReturnParams() {
-    const params = new URLSearchParams(window.location.search);
-    const payStatus = params.get('payment');
-    if (!payStatus) return;
-
-    if (payStatus === 'success') {
-      alert(this.translator.t('pay_success_msg'));
-      window.history.replaceState({}, document.title, window.location.pathname);
-      if (this.currentUser) {
-        await this.refreshSession();
-      }
-    } else if (payStatus === 'failure') {
-      alert(this.translator.t('pay_fail_msg'));
-      window.history.replaceState({}, document.title, window.location.pathname);
-    }
-  }
-}
-
-const app = new FortalOpsApp();
-app.init();
